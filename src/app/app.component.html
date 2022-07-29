@@ -1,0 +1,192 @@
+<mat-toolbar color="primary">
+  <span>ngx-touch-keyboard</span>
+
+  <div style="flex: 1 1 auto"></div>
+
+  <button
+    mat-icon-button
+    class="toggle-theme"
+    [matTooltip]="!isDark ? 'Dark' : 'Light'"
+    (click)="toggleScheme()"
+  >
+    <mat-icon>
+      {{ !isDark ? "dark_mode" : "light_mode" }}
+    </mat-icon>
+  </button>
+</mat-toolbar>
+
+<main>
+  <mat-card>
+    <mat-card-title>Sample</mat-card-title>
+    <mat-card-content>
+      <span>open with button</span>
+      <div class="native-input">
+        <input
+          type="text"
+          ngxTouchKeyboard
+          #sampleTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="sampleTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </div>
+
+      <div style="margin-bottom: 2rem"></div>
+
+      <span>open with focus</span>
+      <div class="native-input">
+        <input
+          type="text"
+          ngxTouchKeyboard
+          #sample2TouchKeyboard="ngxTouchKeyboard"
+          (focus)="sample2TouchKeyboard.openPanel()"
+        />
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>Layouts</mat-card-title>
+    <mat-card-subtitle>
+      Depends on attribute inputmode, the keyboard layout is changed.
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Default</mat-label>
+        <input
+          matInput
+          type="text"
+          ngxTouchKeyboard
+          #defaultTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="defaultTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="search"
+          ngxTouchKeyboard
+          #searchTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="searchTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="email"
+          ngxTouchKeyboard
+          #emailTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="emailTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Url</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="url"
+          ngxTouchKeyboard
+          #urlTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="urlTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Numeric</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="numeric"
+          ngxTouchKeyboard
+          #numericTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="numericTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Decimal</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="decimal"
+          ngxTouchKeyboard
+          #decimalTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="decimalTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tel</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="tel"
+          ngxTouchKeyboard
+          #telTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="telTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+</main>
