@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Virtual Keyboard for Angular applications",
   "peerDependencies": {
-    "@angular/common": "^14.1.0",
-    "@angular/core": "^14.1.0",
-    "@angular/cdk": "^14.1.0"
+    "@angular/common": ">=10.0.0",
+    "@angular/core": ">=10.0.0",
+    "@angular/cdk": ">=10.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
