@@ -8,7 +8,7 @@ Virtual Keyboard for Angular applications.
 <img src="src/assets/images/angularTouchKeyboard.png" alt="angular touch keyboard"/>
 
 ## Demo
-https://stackblitz.com/edit/ngx-touch-keyboard
+https://mohsen77sk.github.io/angular-touch-keyboard/
 
 ## Install
 
