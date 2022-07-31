@@ -1,17 +1,17 @@
 :root {
-  --touch-keyboard-text: #27272a;
-  --touch-keyboard-background: rgba(238, 238, 238, 0.87);
-  --touch-keyboard-button: rgba(255, 255, 255, 0.96);
-  --touch-keyboard-button-fn: rgba(255, 255, 255, 0.5);
-  --touch-keyboard-button-active: rgba(0, 0, 0, 0.04);
+  --tk-color-text: #27272a;
+  --tk-background: rgba(238, 238, 238, 0.87);
+  --tk-background-button: rgba(255, 255, 255, 0.96);
+  --tk-background-button-fn: rgba(255, 255, 255, 0.5);
+  --tk-background-button-active: rgba(0, 0, 0, 0.04);
 }
 
 .dark {
-  --touch-keyboard-text: #ffffff;
-  --touch-keyboard-background: rgba(33, 33, 33, 0.87);
-  --touch-keyboard-button: rgba(66, 66, 66, 0.96);
-  --touch-keyboard-button-fn: rgba(66, 66, 66, 0.5);
-  --touch-keyboard-button-active: rgba(255, 255, 255, 0.2);
+  --tk-color-text: #ffffff;
+  --tk-background: rgba(33, 33, 33, 0.87);
+  --tk-background-button: rgba(66, 66, 66, 0.96);
+  --tk-background-button-fn: rgba(66, 66, 66, 0.5);
+  --tk-background-button-active: rgba(255, 255, 255, 0.2);
 }
 
 ngx-touch-keyboard {
@@ -26,8 +26,9 @@ ngx-touch-keyboard {
   user-select: none;
   display: flex;
   justify-content: center;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  background-color: var(--touch-keyboard-background);
+  background-color: var(--tk-background);
   box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
     0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
@@ -65,17 +66,17 @@ ngx-touch-keyboard {
     flex-grow: 1;
     align-items: center;
     justify-content: center;
-    color: var(--touch-keyboard-text);
-    background-color: var(--touch-keyboard-button);
+    color: var(--tk-color-text);
+    background-color: var(--tk-background-button);
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
       0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 
     &.function-key:not(.space-key) {
-      background-color: var(--touch-keyboard-button-fn);
+      background-color: var(--tk-background-button-fn);
     }
 
     &.active {
-      background-color: var(--touch-keyboard-button-active) !important;
+      background-color: var(--tk-background-button-active) !important;
     }
 
     &.ent-key,
