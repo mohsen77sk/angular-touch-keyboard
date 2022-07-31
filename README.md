@@ -1,18 +1,17 @@
 # AngularTouchKeyboard
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![npm version](https://badge.fury.io/js/ngx-touch-keyboard.svg)](http://badge.fury.io/js/ngx-touch-keyboard)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![npm version](https://badge.fury.io/js/ngx-touch-keyboard.svg)](http://badge.fury.io/js/ngx-touch-keyboard)
 
 ## What is this?
 Virtual Keyboard for Angular applications.
 
-<img src="src/assets/images/angularTouchKeyboard.png" alt="angular touch keyboard"/>
+<img src="https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/angularTouchKeyboard.png" alt="angular touch keyboard"/>
 
 ## Demo
 https://mohsen77sk.github.io/angular-touch-keyboard/
 
 ## Install
 
-### Step 1: Install ngx-touch-keyboard
+### Step 1: Install [ngx-touch-keyboard](https://www.npmjs.com/package/ngx-touch-keyboard)
 ```sh
 $ npm install ngx-touch-keyboard
 ```
@@ -32,7 +31,13 @@ import { ngxTouchKeyboardModule }  from 'ngx-touch-keyboard';
 export class AppModule { }
 ```
 
+### Compatibility
+
+* `@angular/core`: ^14.0.0
+* `@angular/cli`: ^14.0.0
+
 ## Usage
+
 Simple usage example
 ```html
 <input
@@ -42,6 +47,7 @@ Simple usage example
   (focus)="touchKeyboard.openPanel()"
 />
 ```
+
 Material usage example
 ```html
 <mat-form-field>
@@ -63,24 +69,45 @@ Material usage example
 </mat-form-field>
 ```
 ### Methods
+Here's the list of all available methods:
 
 | Methods | Description |
 | --- | --- |
-| `openPanel`   | Open keyboard panel   |
-| `closePanel`  | Close keyboard panel  |
-| `togglePanel` | Toggle keyboard panel |
+| `openPanel(): void`   | Open keyboard panel   |
+| `closePanel(): void`  | Close keyboard panel  |
+| `togglePanel(): void` | Toggle keyboard panel |
 
-### Layouts
+## Themes
+#### Built-in themes
+* `default`: white theme
+* `dark`: dark theme
 
-| inputmode | screenshot |
+To use the `dark` theme, you must put the class `dark` in the body.
+
+#### Create custom theme
+To customize the theme, you need to use css variables.
+
+| Name | Description |
 | --- | --- |
-| `inputmode='text'`    | <img src="src/assets/images/text.png" alt="angular touch keyboard" width="260"/> |
-| `inputmode='search'`  | <img src="src/assets/images/search.png" alt="angular touch keyboard" width="260"/> |
-| `inputmode='email'`   | <img src="src/assets/images/email.png" alt="angular touch keyboard" width="260"/> |
-| `inputmode='url'`     | <img src="src/assets/images/url.png" alt="angular touch keyboard" width="260"/> |
-| `inputmode='numeric'` | <img src="src/assets/images/number.png" alt="angular touch keyboard" width="260"/> |
-| `inputmode='decimal'` | <img src="src/assets/images/decimal.png" alt="angular touch keyboard" width="260"/> |
-| `inputmode='tel'`     | <img src="src/assets/images/tel.png" alt="angular touch keyboard" width="260"/> |
+| `--tk-color-text` | color of text button |
+| `--tk-background` | color of background panel |
+| `--tk-background-button` | color of background basic button |
+| `--tk-background-button-fn` | color of background functional button |
+| `--tk-background-button-active` | color of background active button |
+
+## Layouts
+Depends on attribute inputmode, the keyboard layout is changed.
+
+
+| inputmode | Screenshot |
+| --- | --- |
+| `inputmode='text'`    | <img src="https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/text.png" alt="angular touch keyboard" width="260"/> |
+| `inputmode='search'`  | <img src="https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/search.png" alt="angular touch keyboard" width="260"/> |
+| `inputmode='email'`   | <img src="https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/email.png" alt="angular touch keyboard" width="260"/> |
+| `inputmode='url'`     | <img src="https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/url.png" alt="angular touch keyboard" width="260"/> |
+| `inputmode='numeric'` | <img src="https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/number.png" alt="angular touch keyboard" width="260"/> |
+| `inputmode='decimal'` | <img src="https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/decimal.png" alt="angular touch keyboard" width="260"/> |
+| `inputmode='tel'`     | <img src="https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/tel.png" alt="angular touch keyboard" width="260"/> |
 
 ## License
 [The MIT License (MIT)](LICENSE)
