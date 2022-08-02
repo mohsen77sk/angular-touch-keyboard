@@ -8,9 +8,10 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { KeyboardDisplay, KeyboardLayout } from './layouts/layouts.type';
-import { getDefaultDisplay, getDefaultLayout } from './layouts';
+import { getLayout, getDisplay } from './layouts';
 
 @Component({
   selector: 'ngx-touch-keyboard',
@@ -39,7 +40,10 @@ export class NgxTouchKeyboardComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(private _elementRef: ElementRef<HTMLInputElement>) {}
+  constructor(
+    private _sanitizer: DomSanitizer,
+    private _elementRef: ElementRef<HTMLInputElement>
+  ) {}
 
   // -----------------------------------------------------------------------------------------------------
   // @ Decorated methods
@@ -98,8 +102,8 @@ export class NgxTouchKeyboardComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this.layout = getDefaultLayout();
-    this.display = getDefaultDisplay();
+    this.layout = getLayout();
+    this.display = getDisplay();
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -196,8 +200,10 @@ export class NgxTouchKeyboardComponent implements OnInit {
    * @param button The button's layout name
    * @return The display name to be show to the button
    */
-  getButtonDisplayName(button: string): string {
-    return this.display[button] || button;
+  getButtonDisplayName(button: string): SafeHtml {
+    return this._sanitizer.bypassSecurityTrustHtml(
+      this.display[button] || button
+    );
   }
 
   /**

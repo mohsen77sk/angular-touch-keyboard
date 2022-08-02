@@ -17,9 +17,8 @@
           "
           (pointerup)="handleButtonMouseUp(key, $event)"
           (pointercancel)="handleButtonMouseUp(key, $event)"
-        >
-          {{ getButtonDisplayName(key) }}
-        </button>
+          [innerHtml]="getButtonDisplayName(key)"
+        ></button>
       </ng-container>
     </div>
   </ng-container>
