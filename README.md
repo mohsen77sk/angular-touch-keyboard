@@ -77,6 +77,14 @@ Material usage example
 </mat-form-field>
 ```
 
+### Properties
+
+| Property | Description |
+| --- | --- |
+| `ngxTouchKeyboard` | Required to initialize Virtual Keyboard to specified input. |
+| `ngxTouchKeyboardDebug` | Debug mode is on. |
+| `ngxTouchKeyboardFullScreen` | Full screen mode is on. |
+
 ### Methods
 
 Here's the list of all available methods:

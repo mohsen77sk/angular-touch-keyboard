@@ -35,7 +35,7 @@ ngx-touch-keyboard {
 
 .touch-keyboard {
   flex: 1 1 auto;
-  max-width: 860px;
+  max-width: 840px;
 
   .touch-keyboard-row {
     display: flex;
@@ -86,10 +86,7 @@ ngx-touch-keyboard {
     &.ent-key,
     &.abc-key,
     &.numbers-key,
-    &.extends-key {
-      max-width: 8rem;
-    }
-
+    &.extends-key,
     &.language-key {
       max-width: 4rem;
     }
@@ -107,6 +104,19 @@ ngx-touch-keyboard {
 
     &:not(:last-child) {
       margin-right: 0.25rem;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .touch-keyboard {
+    .touch-keyboard-key {
+      &.ent-key,
+      &.abc-key,
+      &.numbers-key,
+      &.extends-key {
+        max-width: 6rem;
+      }
     }
   }
 }

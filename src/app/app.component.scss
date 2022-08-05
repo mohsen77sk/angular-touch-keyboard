@@ -1,5 +1,17 @@
+.mat-toolbar {
+  sup {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
+
+  .mat-icon-button {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
+}
+
 main {
-  max-width: 840px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
 

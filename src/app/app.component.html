@@ -1,11 +1,13 @@
 <mat-toolbar color="primary">
-  <span>ngx-touch-keyboard</span>
+  <span> ngx-touch-keyboard </span>
+  <sup>
+    <small>v{{ version }}</small>
+  </sup>
 
   <div style="flex: 1 1 auto"></div>
 
   <button
     mat-icon-button
-    class="toggle-theme"
     [matTooltip]="!isDark ? 'Dark' : 'Light'"
     (click)="toggleScheme()"
   >
@@ -13,24 +15,35 @@
       {{ !isDark ? "dark_mode" : "light_mode" }}
     </mat-icon>
   </button>
+
+  <a
+    mat-icon-button
+    matTooltip="Github"
+    href="https://github.com/mohsen77sk/angular-touch-keyboard"
+  >
+    <img
+      src="./assets/icons/github-circle-white-transparent.svg"
+      width="24"
+      height="24"
+    />
+  </a>
 </mat-toolbar>
 
 <main>
   <mat-card>
-    <mat-card-title>Sample</mat-card-title>
+    <mat-card-title>Basic sample</mat-card-title>
     <mat-card-content>
       <span>open with button</span>
       <div class="native-input">
         <input
           type="text"
           ngxTouchKeyboard
-          #sampleTouchKeyboard="ngxTouchKeyboard"
+          #basicTouchKeyboard="ngxTouchKeyboard"
         />
         <button
           mat-icon-button
-          matSuffix
           type="button"
-          (click)="sampleTouchKeyboard.togglePanel()"
+          (click)="basicTouchKeyboard.togglePanel()"
         >
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
@@ -43,9 +56,32 @@
         <input
           type="text"
           ngxTouchKeyboard
-          #sample2TouchKeyboard="ngxTouchKeyboard"
-          (focus)="sample2TouchKeyboard.openPanel()"
+          #basic2TouchKeyboard="ngxTouchKeyboard"
+          (focus)="basic2TouchKeyboard.openPanel()"
+          (blur)="basic2TouchKeyboard.closePanel()"
         />
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>Fullscreen sample</mat-card-title>
+    <mat-card-content>
+      <span>open with button</span>
+      <div class="native-input">
+        <input
+          type="text"
+          ngxTouchKeyboard
+          ngxTouchKeyboardFullScreen
+          #fullscreenTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button
+          mat-icon-button
+          type="button"
+          (click)="fullscreenTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
       </div>
     </mat-card-content>
   </mat-card>

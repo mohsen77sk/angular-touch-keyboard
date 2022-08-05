@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import packageJson from '../../projects/ngx-touch-keyboard/package.json';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 })
 export class AppComponent {
   isDark = true;
+  version = packageJson.version;
 
   /**
    * constructor
