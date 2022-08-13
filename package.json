@@ -1,14 +1,16 @@
 {
   "name": "angular-touch-keyboard",
   "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test-lib": "ng test ngx-touch-keyboard",
+    "test-demo": "ng test angular-touch-keyboard",
+    "build-lib": "ng build ngx-touch-keyboard && cp -v README.md dist/ngx-touch-keyboard/",
+    "build-demo": "npm run build-lib && ng build --base-href /ngx-touch-keyboard/"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^14.1.0",
     "@angular/cdk": "^14.1.0",
