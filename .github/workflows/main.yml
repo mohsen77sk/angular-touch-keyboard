@@ -48,5 +48,5 @@ jobs:
     - name: Install Dependencies
       run: npm ci
         
-    - run: ./node_modules/.bin/ng test ngx-touch-keyboard --progress false --watch=false
-    - run: ./node_modules/.bin/ng test --progress false --watch=false
+    - run: ./node_modules/.bin/ng test ngx-touch-keyboard --progress false --watch=false --browsers ChromeHeadlessCustom
+    - run: ./node_modules/.bin/ng test --progress false --watch=false --browsers ChromeHeadlessCustom
