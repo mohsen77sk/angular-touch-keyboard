@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "postinstall": "playwright install chromium",
     "test-lib": "ng test ngx-touch-keyboard",
     "test-demo": "ng test angular-touch-keyboard",
     "build-lib": "ng build ngx-touch-keyboard && cp -v README.md dist/ngx-touch-keyboard/",
