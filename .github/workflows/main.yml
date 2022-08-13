@@ -20,10 +20,10 @@ jobs:
         cache: 'npm'
     
     - name: Install Dependencies
-    - run: npm ci
+      run: npm ci
     
     - name: Build Application
-    - run: npm run build-demo
+      run: npm run build-demo
     
     - uses: actions/upload-artifact@v3
       with:
