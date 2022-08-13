@@ -1,0 +1,46 @@
+name: main
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+        
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        cache: 'npm'
+    
+    - name: Install Dependencies
+    - run: npm ci
+    
+    - name: Build Application
+    - run: npm run build-demo
+    
+    - uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: dist/
+  
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        cache: 'npm'
+        
+    - run: ./node_modules/.bin/ng test ngx-touch-keyboard --progress false --watch=false
+    - run: ./node_modules/.bin/ng test --progress false --watch=false
