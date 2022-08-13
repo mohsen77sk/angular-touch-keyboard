@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
         
     steps:
-    - uses: actions/checkout@v3
+    - name: Syncing repository
+      uses: actions/checkout@v3
     
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -25,7 +26,8 @@ jobs:
     - name: Build Application
       run: npm run build-demo
     
-    - uses: actions/upload-artifact@v3
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
       with:
         name: dist
         path: dist/
@@ -35,12 +37,16 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - name: Syncing repository
+      uses: actions/checkout@v3
     
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         cache: 'npm'
+        
+    - name: Install Dependencies
+      run: npm ci
         
     - run: ./node_modules/.bin/ng test ngx-touch-keyboard --progress false --watch=false
     - run: ./node_modules/.bin/ng test --progress false --watch=false
