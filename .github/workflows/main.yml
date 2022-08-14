@@ -48,6 +48,7 @@ jobs:
     - name: Install Dependencies
       run: npm ci
         
-    - name: Test
+    - name: Test Lib
       run: npm run test-lib
+    - name: Test Demo
       run: npm run test-demo
