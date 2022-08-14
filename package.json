@@ -9,7 +9,7 @@
     "test-lib": "ng test ngx-touch-keyboard --watch=false --browsers=ChromeHeadless",
     "test-demo": "ng test angular-touch-keyboard --watch=false --browsers=ChromeHeadless",
     "build-lib": "ng build ngx-touch-keyboard && cp -v README.md dist/ngx-touch-keyboard/",
-    "build-demo": "npm run build-lib && ng build --base-href /ngx-touch-keyboard/"
+    "build-demo": "npm run build-lib && ng build --base-href /angular-touch-keyboard/"
   },
   "dependencies": {
     "@angular/animations": "^14.1.0",
