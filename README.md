@@ -130,6 +130,13 @@ Depends on attribute inputmode, the keyboard layout is changed.
 | `inputmode='decimal'` | ![angular touch keyboard](https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/decimal.png) |
 | `inputmode='tel'`     | ![angular touch keyboard](https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/tel.png) |
 
+## Development
+
+The most useful commands for development are:
+
+* `npm run start` to start a development server
+* `npm run build-demo` to build the demo locally (it will be published automatically by GitHub Actions)
+
 ## License
 
 [The MIT License (MIT)](LICENSE)
