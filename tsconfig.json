@@ -15,7 +15,10 @@
     "sourceMap": true,
     "paths": {
       "ngx-touch-keyboard": [
-        "dist/ngx-touch-keyboard"
+        "projects/ngx-touch-keyboard/src/public-api"
+      ],
+      "ngx-touch-keyboard/*": [
+        "dist/ngx-touch-keyboard/*"
       ]
     },
     "declaration": false,
