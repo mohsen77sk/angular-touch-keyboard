@@ -1,6 +1,6 @@
 # AngularTouchKeyboard
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![npm version](https://badge.fury.io/js/ngx-touch-keyboard.svg)](http://badge.fury.io/js/ngx-touch-keyboard)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![npm version](https://badge.fury.io/js/ngx-touch-keyboard.svg)](http://badge.fury.io/js/ngx-touch-keyboard) [![Build Status](https://github.com/mohsen77sk/angular-touch-keyboard/workflows/main/badge.svg)](https://github.com/mohsen77sk/angular-touch-keyboard/actions)
 
 ## What is this?
 
