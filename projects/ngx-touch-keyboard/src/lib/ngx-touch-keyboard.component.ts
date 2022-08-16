@@ -4,6 +4,8 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
+  Inject,
+  LOCALE_ID,
   OnInit,
   Output,
   ViewEncapsulation,
@@ -21,8 +23,9 @@ import { getLayout, getDisplay } from './layouts';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxTouchKeyboardComponent implements OnInit {
+  locale!: string;
   layoutMode = 'text';
-  layoutName = 'default';
+  layoutName = 'alphabetic';
   layout!: KeyboardLayout;
   display!: KeyboardDisplay;
   debug = false;
@@ -42,7 +45,8 @@ export class NgxTouchKeyboardComponent implements OnInit {
    */
   constructor(
     private _sanitizer: DomSanitizer,
-    private _elementRef: ElementRef<HTMLInputElement>
+    private _elementRef: ElementRef<HTMLInputElement>,
+    @Inject(LOCALE_ID) private _defaultLocale: string
   ) {}
 
   // -----------------------------------------------------------------------------------------------------
@@ -102,13 +106,22 @@ export class NgxTouchKeyboardComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this.layout = getLayout();
-    this.display = getDisplay();
+    this.setLayoutForLocale(this.locale || this._defaultLocale);
   }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Set layout keyboard for locale
+   *
+   * @param locale
+   */
+  setLayoutForLocale(locale: string): void {
+    this.layout = getLayout(locale);
+    this.display = getDisplay(locale);
+  }
 
   /**
    * Set active input
@@ -129,13 +142,21 @@ export class NgxTouchKeyboardComponent implements OnInit {
       )
     ) {
       this.layoutMode = inputMode;
-      this.layoutName = 'default';
     } else {
       this.layoutMode = 'text';
+    }
+
+    if (
+      inputMode &&
+      ['numeric', 'decimal', 'tel'].some((i) => i === inputMode)
+    ) {
       this.layoutName = 'default';
+    } else {
+      this.layoutName = 'alphabetic';
     }
 
     if (this.debug) {
+      console.log('Locale:', `${this.locale || this._defaultLocale}`);
       console.log('Layout:', `${this.layoutMode}_${this.layoutName}`);
     }
 
@@ -171,10 +192,8 @@ export class NgxTouchKeyboardComponent implements OnInit {
    * @param button The button's layout name
    * @return The button type
    */
-  getButtonType(button: string): string {
-    return button.includes('{') && button.includes('}')
-      ? 'function-key'
-      : 'standard-key';
+  getButtonType(button: string): 'standard-key' | 'function-key' {
+    return this.isStandardButton(button) ? 'standard-key' : 'function-key';
   }
 
   /**
@@ -218,18 +237,10 @@ export class NgxTouchKeyboardComponent implements OnInit {
     }
 
     if (button === '{shift}') {
-      this.layoutName = this.layoutName === 'default' ? 'shift' : 'default';
+      this.layoutName =
+        this.layoutName === 'alphabetic' ? 'shift' : 'alphabetic';
       return;
-    } else if (button === '{abc}') {
-      this.layoutName = 'default';
-      return;
-    } else if (button === '{numbers}') {
-      this.layoutName = 'numbers';
-      return;
-    } else if (button === '{extends}') {
-      this.layoutName = 'extends';
-      return;
-    } else if (button === '{ent}') {
+    } else if (button === '{done}') {
       this.closePanel.emit();
       return;
     }
@@ -241,17 +252,22 @@ export class NgxTouchKeyboardComponent implements OnInit {
     ];
     let output = this._activeInputElement?.value || '';
 
-    if (button === '{backspace}' && output.length > 0) {
-      output = this._removeAt(output, ...commonParams);
-    } else if (button === '{space}') {
-      output = this._addStringAt(output, ' ', ...commonParams);
-    } else if (button === '{tab}') {
-      output = this._addStringAt(output, '\t', ...commonParams);
-    } else if (button === '{enter}') {
-      output = this._addStringAt(output, '\n', ...commonParams);
-    } else if (button === '{' || button === '}') {
-      output = this._addStringAt(output, button, ...commonParams);
-    } else if (!button.includes('{') && !button.includes('}')) {
+    if (!this.isStandardButton(button)) {
+      // Handel functional button
+      if (button === '{backspace}') {
+        if (output.length > 0) output = this._removeAt(output, ...commonParams);
+      } else if (button === '{space}') {
+        output = this._addStringAt(output, ' ', ...commonParams);
+      } else if (button === '{tab}') {
+        output = this._addStringAt(output, '\t', ...commonParams);
+      } else if (button === '{enter}') {
+        output = this._addStringAt(output, '\n', ...commonParams);
+      } else {
+        this.layoutName = button.substring(1, button.length - 1);
+        return;
+      }
+    } else {
+      // Handel standard button
       output = this._addStringAt(output, button, ...commonParams);
     }
 
