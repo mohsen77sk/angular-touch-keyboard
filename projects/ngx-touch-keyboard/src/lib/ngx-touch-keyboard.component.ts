@@ -23,7 +23,7 @@ import * as Locales from './Locale';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxTouchKeyboardComponent {
-  locale!: Locale;
+  locale: Locale = Locales.enUS;
   layoutMode = 'text';
   layoutName = 'alphabetic';
   debug = false;
