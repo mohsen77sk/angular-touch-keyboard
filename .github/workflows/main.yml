@@ -56,7 +56,7 @@ jobs:
   publish-demo:
     name: Publish demo
     runs-on: ubuntu-latest
-    if: ${{ github.event.push }}
+    if: ${{ github.event_name == 'push' }}
     needs:
       - build
       - test
