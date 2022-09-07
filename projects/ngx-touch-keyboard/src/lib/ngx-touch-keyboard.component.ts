@@ -6,14 +6,14 @@ import {
   HostListener,
   Inject,
   LOCALE_ID,
-  OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { KeyboardDisplay, KeyboardLayout } from './layouts/layouts.type';
-import { getLayout, getDisplay } from './layouts';
+import { fnButton } from './Locale/constants';
+import { Locale } from './Locale/type';
+import * as Locales from './Locale';
 
 @Component({
   selector: 'ngx-touch-keyboard',
@@ -22,12 +22,10 @@ import { getLayout, getDisplay } from './layouts';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgxTouchKeyboardComponent implements OnInit {
-  locale!: string;
+export class NgxTouchKeyboardComponent {
+  locale!: Locale;
   layoutMode = 'text';
   layoutName = 'alphabetic';
-  layout!: KeyboardLayout;
-  display!: KeyboardDisplay;
   debug = false;
 
   @Output() closePanel = new EventEmitter<void>();
@@ -99,28 +97,25 @@ export class NgxTouchKeyboardComponent implements OnInit {
   }
 
   // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On init
-   */
-  ngOnInit(): void {
-    this.setLayoutForLocale(this.locale || this._defaultLocale);
-  }
-
-  // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
 
   /**
    * Set layout keyboard for locale
    *
-   * @param locale
+   * @param value
    */
-  setLayoutForLocale(locale: string): void {
-    this.layout = getLayout(locale);
-    this.display = getDisplay(locale);
+  setLocale(value: string = this._defaultLocale): void {
+    // normalize value
+    value = value.replace('-', '').trim();
+    // Set Locale if supported
+    if ((Object.keys(Locales) as readonly string[]).includes(value)) {
+      this.locale = Locales[value as 'enUS'];
+    }
+    // Set default Locale if not supported
+    else {
+      this.locale = Locales.enUS;
+    }
   }
 
   /**
@@ -156,7 +151,7 @@ export class NgxTouchKeyboardComponent implements OnInit {
     }
 
     if (this.debug) {
-      console.log('Locale:', `${this.locale || this._defaultLocale}`);
+      console.log('Locale:', `${this.locale.code || this._defaultLocale}`);
       console.log('Layout:', `${this.layoutMode}_${this.layoutName}`);
     }
 
@@ -221,7 +216,7 @@ export class NgxTouchKeyboardComponent implements OnInit {
    */
   getButtonDisplayName(button: string): SafeHtml {
     return this._sanitizer.bypassSecurityTrustHtml(
-      this.display[button] || button
+      this.locale.display[button] || button
     );
   }
 
@@ -236,11 +231,11 @@ export class NgxTouchKeyboardComponent implements OnInit {
       console.log('Key pressed:', button);
     }
 
-    if (button === '{shift}') {
+    if (button === fnButton.SHIFT) {
       this.layoutName =
         this.layoutName === 'alphabetic' ? 'shift' : 'alphabetic';
       return;
-    } else if (button === '{done}') {
+    } else if (button === fnButton.DONE) {
       this.closePanel.emit();
       return;
     }
@@ -254,13 +249,13 @@ export class NgxTouchKeyboardComponent implements OnInit {
 
     if (!this.isStandardButton(button)) {
       // Handel functional button
-      if (button === '{backspace}') {
+      if (button === fnButton.BACKSPACE) {
         if (output.length > 0) output = this._removeAt(output, ...commonParams);
-      } else if (button === '{space}') {
+      } else if (button === fnButton.SPACE) {
         output = this._addStringAt(output, ' ', ...commonParams);
-      } else if (button === '{tab}') {
+      } else if (button === fnButton.TAB) {
         output = this._addStringAt(output, '\t', ...commonParams);
-      } else if (button === '{enter}') {
+      } else if (button === fnButton.ENTER) {
         output = this._addStringAt(output, '\n', ...commonParams);
       } else {
         this.layoutName = button.substring(1, button.length - 1);
@@ -320,8 +315,8 @@ export class NgxTouchKeyboardComponent implements OnInit {
       if (
         this._isMouseHold &&
         ((!button.includes('{') && !button.includes('}')) ||
-          button === '{backspace}' ||
-          button === '{space}')
+          button === fnButton.BACKSPACE ||
+          button === fnButton.SPACE)
       ) {
         if (this.debug) {
           console.log('Button held:', button);

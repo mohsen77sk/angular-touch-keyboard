@@ -1,7 +1,7 @@
-import { KeyboardLayout, KeyboardDisplay } from '../layouts.type';
-import { icons } from '../data.constants';
+import { Layout, Display, Locale } from '../type';
+import { fnDisplay } from '../constants';
 
-export const layout: KeyboardLayout = {
+const layouts: Layout = {
   text_alphabetic: [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
@@ -118,12 +118,21 @@ export const layout: KeyboardLayout = {
   ],
 };
 
-export const display: KeyboardDisplay = {
-  '{done}': icons.DONE,
-  '{shift}': icons.SHIFT,
-  '{backspace}': icons.BACKSPACE,
+const display: Display = {
+  '{done}': fnDisplay.DONE,
+  '{shift}': fnDisplay.SHIFT,
+  '{backspace}': fnDisplay.BACKSPACE,
+  '{space}': fnDisplay.SPACE,
   '{alphabetic}': 'ABC',
   '{numeric}': '123',
   '{symbolic}': '#+=',
-  '{space}': ' ',
 };
+
+const locale: Locale = {
+  code: 'en-US',
+  dir: 'ltr',
+  layouts: layouts,
+  display: display,
+};
+
+export default locale;

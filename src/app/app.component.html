@@ -92,12 +92,21 @@
       Depends on attribute inputmode, the keyboard layout is changed.
     </mat-card-subtitle>
     <mat-card-content>
+      <mat-form-field appearance="outline" style="width: auto">
+        <mat-label>Language</mat-label>
+        <mat-select placeholder="Placeholder" [(value)]="language">
+          <mat-option *ngFor="let item of languages" [value]="item.value">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <mat-form-field appearance="outline">
         <mat-label>Default</mat-label>
         <input
           matInput
           type="text"
-          ngxTouchKeyboard
+          [ngxTouchKeyboard]="language"
           #defaultTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -116,7 +125,7 @@
           matInput
           type="text"
           inputmode="search"
-          ngxTouchKeyboard
+          [ngxTouchKeyboard]="language"
           #searchTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -135,7 +144,7 @@
           matInput
           type="text"
           inputmode="email"
-          ngxTouchKeyboard
+          [ngxTouchKeyboard]="language"
           #emailTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -154,7 +163,7 @@
           matInput
           type="text"
           inputmode="url"
-          ngxTouchKeyboard
+          [ngxTouchKeyboard]="language"
           #urlTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -173,7 +182,7 @@
           matInput
           type="text"
           inputmode="numeric"
-          ngxTouchKeyboard
+          [ngxTouchKeyboard]="language"
           #numericTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -192,7 +201,7 @@
           matInput
           type="text"
           inputmode="decimal"
-          ngxTouchKeyboard
+          [ngxTouchKeyboard]="language"
           #decimalTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -211,7 +220,7 @@
           matInput
           type="text"
           inputmode="tel"
-          ngxTouchKeyboard
+          [ngxTouchKeyboard]="language"
           #telTouchKeyboard="ngxTouchKeyboard"
         />
         <button

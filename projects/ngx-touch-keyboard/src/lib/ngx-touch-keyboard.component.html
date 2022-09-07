@@ -1,7 +1,7 @@
 <div dir="ltr" class="touch-keyboard" [ngClass]="'layout-' + layoutName">
   <ng-container
     *ngFor="
-      let row of layout[layoutMode + '_' + layoutName];
+      let row of locale.layouts[layoutMode + '_' + layoutName];
       let rowIndex = index
     "
   >
@@ -9,6 +9,7 @@
       <ng-container *ngFor="let key of row; let keyIndex = index">
         <button
           [name]="key"
+          [dir]="locale.dir"
           class="touch-keyboard-key"
           [ngClass]="[getButtonClass(key)]"
           [attr.data-layout]="layoutName"

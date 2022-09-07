@@ -24,6 +24,16 @@ import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
 export class NgxTouchKeyboardDirective implements OnDestroy {
   isOpen = false;
 
+  private _locale!: string;
+  /** locale */
+  @Input()
+  get ngxTouchKeyboard() {
+    return this._locale;
+  }
+  set ngxTouchKeyboard(value: string) {
+    this._locale = value;
+  }
+
   private _debugMode!: boolean;
   /** debug mode */
   @Input()
@@ -106,6 +116,7 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
       new ComponentPortal(NgxTouchKeyboardComponent)
     );
     this._panelRef.instance.debug = this.ngxTouchKeyboardDebug;
+    this._panelRef.instance.setLocale(this._locale);
     this._panelRef.instance.setActiveInput(this._elementRef.nativeElement);
     this.isOpen = true;
 
