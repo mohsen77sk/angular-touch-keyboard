@@ -83,11 +83,11 @@ ngx-touch-keyboard {
       background-color: var(--tk-background-button-active) !important;
     }
 
-    &.ent-key,
-    &.abc-key,
-    &.numbers-key,
-    &.extends-key,
-    &.language-key {
+    &.alphabetic-key,
+    &.numeric-key,
+    &.symbolic-key,
+    &.language-key,
+    &.done-key {
       max-width: 4rem;
     }
 
@@ -111,10 +111,10 @@ ngx-touch-keyboard {
 @media (min-width: 600px) {
   .touch-keyboard {
     .touch-keyboard-key {
-      &.ent-key,
-      &.abc-key,
-      &.numbers-key,
-      &.extends-key {
+      &.alphabetic-key,
+      &.numeric-key,
+      &.symbolic-key,
+      &.done-key {
         max-width: 6rem;
       }
     }

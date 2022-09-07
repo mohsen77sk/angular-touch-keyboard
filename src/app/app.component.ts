@@ -11,6 +11,13 @@ export class AppComponent {
   isDark = true;
   version = packageJson.version;
 
+  language = 'en-US';
+  languages = [
+    { value: 'en-US', name: 'English (United States)' },
+    { value: 'en-GB', name: 'English (United Kingdom)' },
+    { value: 'fa-IR', name: 'Persian' },
+  ];
+
   /**
    * constructor
    */

@@ -42,6 +42,14 @@ export class AppModule { }
 * `@angular/core`: ^14.0.0
 * `@angular/cdk`: ^14.0.0
 
+## Localization
+
+AngularTouchKeyboard is localized in 3 keyboard-specific locales:
+
+* `en-US` English (United States) (default)
+* `en-UK` English (United Kingdom)
+* `fa-IR` Persian
+
 ## Usage
 
 Simple usage example
@@ -50,6 +58,17 @@ Simple usage example
 <input
   type="text"
   ngxTouchKeyboard
+  #touchKeyboard="ngxTouchKeyboard"
+  (focus)="touchKeyboard.openPanel()"
+/>
+```
+
+Locale usage example
+
+```html
+<input
+  type="text"
+  ngxTouchKeyboard="fa-IR"
   #touchKeyboard="ngxTouchKeyboard"
   (focus)="touchKeyboard.openPanel()"
 />
