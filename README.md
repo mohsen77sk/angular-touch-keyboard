@@ -39,8 +39,8 @@ export class AppModule { }
 
 ### Compatibility
 
-* `@angular/core`: ^14.0.0
-* `@angular/cdk`: ^14.0.0
+* `@angular/core`: >= 14.0.0
+* `@angular/cdk`: >= 14.0.0
 
 ## Localization
 

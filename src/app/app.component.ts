@@ -13,8 +13,8 @@ export class AppComponent {
 
   language = 'en-US';
   languages = [
-    { value: 'en-US', name: 'English (United States)' },
-    { value: 'en-GB', name: 'English (United Kingdom)' },
+    { value: 'en-US', name: 'English (US)' },
+    { value: 'en-GB', name: 'English (UK)' },
     { value: 'fa-IR', name: 'Persian' },
   ];
 

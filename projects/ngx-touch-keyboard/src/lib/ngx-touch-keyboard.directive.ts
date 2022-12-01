@@ -232,10 +232,17 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
    */
   private _inputOrigin(): any {
     const element = this._elementRef.nativeElement;
+
     // Material form field - Check input in mat-form-field
     if (element.classList.contains('mat-input-element')) {
       // Return [mat-form-field-flex] element
       return element.parentNode?.parentNode;
+    }
+
+    // Material form field - Check input in mat-form-field
+    if (element.classList.contains('mat-mdc-input-element')) {
+      // Return [mat-form-field] element
+      return element.parentNode?.parentNode?.parentNode;
     }
 
     // Return input

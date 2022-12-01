@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,6 +18,7 @@ describe('AppComponent', () => {
         MatIconModule,
         MatCardModule,
         MatInputModule,
+        MatSelectModule,
         MatButtonModule,
         MatTooltipModule,
         MatToolbarModule,

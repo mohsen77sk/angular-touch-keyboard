@@ -14,6 +14,7 @@
 $touch-keyboard-primary: mat.define-palette(mat.$indigo-palette);
 $touch-keyboard-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 $touch-keyboard-warn: mat.define-palette(mat.$red-palette);
+$typography: mat.define-typography-config();
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
@@ -24,6 +25,7 @@ $light-theme: mat.define-light-theme(
       accent: $touch-keyboard-accent,
       warn: $touch-keyboard-warn,
     ),
+    typography: $typography,
   )
 );
 
@@ -34,6 +36,7 @@ $dark-theme: mat.define-dark-theme(
       accent: $touch-keyboard-accent,
       warn: $touch-keyboard-warn,
     ),
+    typography: $typography,
   )
 );
 

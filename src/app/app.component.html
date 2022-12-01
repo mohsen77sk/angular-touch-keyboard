@@ -31,9 +31,11 @@
 
 <main>
   <mat-card>
-    <mat-card-title>Basic sample</mat-card-title>
+    <mat-card-header>
+      <mat-card-title>Basic sample</mat-card-title>
+    </mat-card-header>
     <mat-card-content>
-      <span>open with button</span>
+      <p>open with button</p>
       <div class="native-input">
         <input
           type="text"
@@ -65,9 +67,11 @@
   </mat-card>
 
   <mat-card>
-    <mat-card-title>Fullscreen sample</mat-card-title>
+    <mat-card-header>
+      <mat-card-title>Fullscreen sample</mat-card-title>
+    </mat-card-header>
     <mat-card-content>
-      <span>open with button</span>
+      <p>open with button</p>
       <div class="native-input">
         <input
           type="text"
@@ -87,11 +91,14 @@
   </mat-card>
 
   <mat-card>
-    <mat-card-title>Layouts</mat-card-title>
-    <mat-card-subtitle>
-      Depends on attribute inputmode, the keyboard layout is changed.
-    </mat-card-subtitle>
+    <mat-card-header>
+      <mat-card-title>Layouts</mat-card-title>
+      <mat-card-subtitle>
+        Depends on attribute inputmode, the keyboard layout is changed.
+      </mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content>
+      <p></p>
       <mat-form-field appearance="outline" style="width: auto">
         <mat-label>Language</mat-label>
         <mat-select placeholder="Placeholder" [(value)]="language">
