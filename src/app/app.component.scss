@@ -15,7 +15,7 @@ main {
   margin: 0 auto;
   padding: 2rem;
 
-  mat-card {
+  .mat-mdc-card {
     margin-bottom: 2rem;
   }
 }
@@ -33,7 +33,18 @@ main {
   }
 }
 
-mat-form-field {
+.mat-mdc-form-field {
   margin-top: 1rem !important;
   width: 100%;
+}
+
+.mdc-dialog__title {
+  display: flex !important;
+  align-items: center !important;
+  padding: 9px 24px !important;
+
+  label {
+    display: flex;
+    flex: 1;
+  }
 }

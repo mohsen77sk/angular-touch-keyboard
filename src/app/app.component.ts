@@ -1,11 +1,15 @@
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import packageJson from '../../projects/ngx-touch-keyboard/package.json';
+
+import { MaterialDialogExampleComponent } from './material-dialog-example/material-dialog-example.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
   isDark = true;
@@ -21,7 +25,10 @@ export class AppComponent {
   /**
    * constructor
    */
-  constructor(@Inject(DOCUMENT) private _document: any) {}
+  constructor(
+    @Inject(DOCUMENT) private _document: any,
+    private _dialog: MatDialog
+  ) {}
 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks
@@ -49,6 +56,17 @@ export class AppComponent {
     } else {
       this._updateScheme('light');
     }
+  }
+
+  /**
+   * Open dialog
+   */
+  openDialog(): void {
+    this._dialog.open(MaterialDialogExampleComponent, {
+      width: '600px',
+      autoFocus: false,
+      disableClose: true,
+    });
   }
 
   // -----------------------------------------------------------------------------------------------------
