@@ -98,6 +98,11 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
       this._createOverlay();
     }
 
+    // Set overlay class
+    this._overlayRef.addPanelClass('ngx-touch-keyboard-overlay-pane');
+    if (this.ngxTouchKeyboardFullScreen)
+      this._overlayRef.addPanelClass('ngx-touch-keyboard-fullScreen');
+
     // Update direction the overlay
     this._overlayRef.setDirection(
       this._document.body.getAttribute('dir') || this._document.dir || 'ltr'

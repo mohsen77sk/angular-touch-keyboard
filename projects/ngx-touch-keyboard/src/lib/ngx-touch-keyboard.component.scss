@@ -33,6 +33,10 @@ ngx-touch-keyboard {
     0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
 
+.ngx-touch-keyboard-fullScreen > ngx-touch-keyboard {
+  border-radius: 0;
+}
+
 .touch-keyboard {
   flex: 1 1 auto;
   max-width: 840px;
