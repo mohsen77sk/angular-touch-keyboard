@@ -47,8 +47,6 @@ $dark-theme: mat.define-dark-theme(
 
 body.dark {
   @include mat.all-component-colors($dark-theme);
-
-  background-color: #303030;
 }
 
 /* HTML and Body default styles */
@@ -70,5 +68,4 @@ html {
 body {
   font-size: 0.875rem;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #f5f5f5;
 }
