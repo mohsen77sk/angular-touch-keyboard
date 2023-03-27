@@ -17,7 +17,7 @@ Virtual Keyboard for Angular applications.
 ### Step 1: Install [ngx-touch-keyboard](https://www.npmjs.com/package/ngx-touch-keyboard)
 
 ```sh
-npm install ngx-touch-keyboard
+npm install @angular/cdk ngx-touch-keyboard
 ```
 
 ### Step 2: Import the module
