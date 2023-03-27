@@ -121,7 +121,7 @@ Here's the list of all available methods:
 * `default`: white theme
 * `dark`: dark theme
 
-To use the `dark` theme, you must put the class `dark` in the body.
+You must put the class `dark` in the body to use the `dark` theme.
 
 ### Create custom theme
 
