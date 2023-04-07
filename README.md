@@ -99,8 +99,8 @@ Material usage example
 
 ### Properties
 
-| Property                       | Description                                                 |
-| ------------------------------ | ----------------------------------------------------------- |
+| Property                     | Description                                                 |
+| ---------------------------- | ----------------------------------------------------------- |
 | `ngxTouchKeyboard`           | Required to initialize Virtual Keyboard to specified input. |
 | `ngxTouchKeyboardDebug`      | Debug mode is on.                                           |
 | `ngxTouchKeyboardFullScreen` | Full screen mode is on.                                     |
@@ -109,8 +109,8 @@ Material usage example
 
 Here's the list of all available methods:
 
-| Methods                 | Description           |
-| ----------------------- | --------------------- |
+| Methods               | Description           |
+| --------------------- | --------------------- |
 | `openPanel(): void`   | Open keyboard panel   |
 | `closePanel(): void`  | Close keyboard panel  |
 | `togglePanel(): void` | Toggle keyboard panel |
@@ -128,8 +128,8 @@ You must put the class `dark` in the body to use the `dark` theme.
 
 To customize the theme, you need to use css variables.
 
-| Name                              | Description                           |
-| --------------------------------- | ------------------------------------- |
+| Name                            | Description                           |
+| ------------------------------- | ------------------------------------- |
 | `--tk-color-text`               | color of text button                  |
 | `--tk-background`               | color of background panel             |
 | `--tk-background-button`        | color of background basic button      |
@@ -140,8 +140,8 @@ To customize the theme, you need to use css variables.
 
 Depends on attribute inputmode, the keyboard layout is changed.
 
-| inputmode               | Screenshot                                                                                             |
-| ----------------------- | ------------------------------------------------------------------------------------------------------ |
+| inputmode             | Screenshot                                                                                               |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
 | `inputmode='text'`    | ![angular touch keyboard](https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/text.png)    |
 | `inputmode='search'`  | ![angular touch keyboard](https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/search.png)  |
 | `inputmode='email'`   | ![angular touch keyboard](https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/email.png)   |
