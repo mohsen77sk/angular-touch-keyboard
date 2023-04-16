@@ -240,6 +240,9 @@ export class NgxTouchKeyboardComponent {
       return;
     }
 
+    const inputMaxLength = this._activeInputElement?.maxLength ?? 0;
+    const inputType = this._activeInputElement?.type ?? '';
+
     const commonParams: [number, number, boolean] = [
       this._caretPosition || 0,
       this._caretPositionEnd || 0,
@@ -247,22 +250,40 @@ export class NgxTouchKeyboardComponent {
     ];
     let output = this._activeInputElement?.value || '';
 
+    // Handel functional button
     if (!this.isStandardButton(button)) {
-      // Handel functional button
+      // Handel BACKSPACE
       if (button === fnButton.BACKSPACE) {
-        if (output.length > 0) output = this._removeAt(output, ...commonParams);
-      } else if (button === fnButton.SPACE) {
-        output = this._addStringAt(output, ' ', ...commonParams);
-      } else if (button === fnButton.TAB) {
-        output = this._addStringAt(output, '\t', ...commonParams);
-      } else if (button === fnButton.ENTER) {
-        output = this._addStringAt(output, '\n', ...commonParams);
-      } else {
+        if (output.length > 0) {
+          output = this._removeAt(output, ...commonParams);
+        }
+      }
+      // Handel SPACE
+      else if (button === fnButton.SPACE) {
+        if (output.length < inputMaxLength) {
+          output = this._addStringAt(output, ' ', ...commonParams);
+        }
+      }
+      // Handel TAB
+      else if (button === fnButton.TAB) {
+        if (output.length < inputMaxLength) {
+          output = this._addStringAt(output, '\t', ...commonParams);
+        }
+      }
+      // Handel ENTER
+      else if (button === fnButton.ENTER) {
+        if (output.length < inputMaxLength) {
+          output = this._addStringAt(output, '\n', ...commonParams);
+        }
+      }
+      // Handel LAYOUT
+      else {
         this.layoutName = button.substring(1, button.length - 1);
         return;
       }
-    } else {
-      // Handel standard button
+    }
+    // Handel standard button
+    else {
       output = this._addStringAt(output, button, ...commonParams);
     }
 
