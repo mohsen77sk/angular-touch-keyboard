@@ -1,4 +1,8 @@
-<div dir="ltr" class="touch-keyboard" [ngClass]="'layout-' + layoutName">
+<div
+  dir="ltr"
+  class="touch-keyboard"
+  [ngClass]="'layout-' + layoutMode + '-' + layoutName"
+>
   <ng-container
     *ngFor="
       let row of locale.layouts[layoutMode + '_' + layoutName];
@@ -12,7 +16,7 @@
           [dir]="locale.dir"
           class="touch-keyboard-key"
           [ngClass]="[getButtonClass(key)]"
-          [attr.data-layout]="layoutName"
+          [attr.data-layout]="layoutMode"
           (pointerdown)="
             handleButtonClicked(key, $event); handleButtonMouseDown(key, $event)
           "

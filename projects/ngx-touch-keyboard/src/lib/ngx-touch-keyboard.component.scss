@@ -90,9 +90,12 @@ ngx-touch-keyboard {
     }
 
     &.alphabetic-key,
+    &.backspace-key,
+    &.shift-key,
     &.numeric-key,
     &.symbolic-key,
     &.language-key,
+    &.enter-key,
     &.done-key {
       max-width: 4rem;
     }
@@ -104,8 +107,8 @@ ngx-touch-keyboard {
     &[data-layout="numeric"],
     &[data-layout="decimal"],
     &[data-layout="tel"] {
-      width: 33%;
-      max-width: none;
+      width: 33% !important;
+      max-width: none !important;
     }
 
     &:not(:last-child) {
@@ -118,8 +121,12 @@ ngx-touch-keyboard {
   .touch-keyboard {
     .touch-keyboard-key {
       &.alphabetic-key,
+      &.backspace-key,
+      &.shift-key,
       &.numeric-key,
       &.symbolic-key,
+      &.language-key,
+      &.enter-key,
       &.done-key {
         max-width: 6rem;
       }
