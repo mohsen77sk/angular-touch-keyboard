@@ -26,7 +26,8 @@ main {
   align-items: center;
   margin-top: 0.25rem;
 
-  input {
+  input,
+  textarea {
     display: flex;
     flex: 1 1 auto;
     height: 32px;

@@ -77,6 +77,18 @@
           (blur)="basicFullscreenTouchKeyboard.closePanel()"
         />
       </div>
+
+      <div style="margin-bottom: 2rem"></div>
+
+      <span>Open with focus (textarea)</span>
+      <div class="native-input">
+        <textarea
+          ngxTouchKeyboard
+          #basicTextareaTouchKeyboard="ngxTouchKeyboard"
+          (focus)="basicTextareaTouchKeyboard.openPanel()"
+          (blur)="basicTextareaTouchKeyboard.closePanel()"
+        ></textarea>
+      </div>
     </mat-card-content>
   </mat-card>
 
@@ -126,6 +138,17 @@
           (focus)="materiaFullscreenTouchKeyboard.openPanel()"
           (blur)="materiaFullscreenTouchKeyboard.closePanel()"
         />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Open with focus (textarea)</mat-label>
+        <textarea
+          matInput
+          ngxTouchKeyboard
+          #materialTextareaTouchKeyboard="ngxTouchKeyboard"
+          (focus)="materialTextareaTouchKeyboard.openPanel()"
+          (blur)="materialTextareaTouchKeyboard.closePanel()"
+        ></textarea>
       </mat-form-field>
     </mat-card-content>
   </mat-card>
