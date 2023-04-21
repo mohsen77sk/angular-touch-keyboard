@@ -58,6 +58,13 @@ export class NgxTouchKeyboardComponent {
     return this._activeInputElement?.maxLength ?? -1;
   }
 
+  /**
+   * Getter for type of input
+   */
+  get isTextarea(): boolean {
+    return this._activeInputElement?.type === 'textarea';
+  }
+
   // -----------------------------------------------------------------------------------------------------
   // @ Decorated methods
   // -----------------------------------------------------------------------------------------------------
@@ -274,7 +281,9 @@ export class NgxTouchKeyboardComponent {
       }
       // Handel ENTER
       else if (button === fnButton.ENTER) {
-        output = this._addStringAt(output, '\n', ...commonParams);
+        if (this.isTextarea) {
+          output = this._addStringAt(output, '\n', ...commonParams);
+        }
       }
       // Handel LAYOUT
       else {
@@ -422,6 +431,12 @@ export class NgxTouchKeyboardComponent {
   private _updateCaretPos(length: number, minus = false) {
     const newCaretPos = this._updateCaretPosAction(length, minus);
     this._setCaretPosition(newCaretPos);
+    // Scroll to bottom
+    setTimeout(() => {
+      this._activeInputElement?.scrollTo({
+        top: this._activeInputElement.scrollHeight,
+      } as ScrollToOptions);
+    });
   }
 
   /**
