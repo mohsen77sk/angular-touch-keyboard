@@ -48,6 +48,17 @@ export class NgxTouchKeyboardComponent {
   ) {}
 
   // -----------------------------------------------------------------------------------------------------
+  // @ Accessors
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Getter for maxLength
+   */
+  get maxLength(): number {
+    return this._activeInputElement?.maxLength ?? -1;
+  }
+
+  // -----------------------------------------------------------------------------------------------------
   // @ Decorated methods
   // -----------------------------------------------------------------------------------------------------
 
@@ -240,9 +251,6 @@ export class NgxTouchKeyboardComponent {
       return;
     }
 
-    const inputMaxLength = this._activeInputElement?.maxLength ?? 0;
-    const inputType = this._activeInputElement?.type ?? '';
-
     const commonParams: [number, number, boolean] = [
       this._caretPosition || 0,
       this._caretPositionEnd || 0,
@@ -254,27 +262,19 @@ export class NgxTouchKeyboardComponent {
     if (!this.isStandardButton(button)) {
       // Handel BACKSPACE
       if (button === fnButton.BACKSPACE) {
-        if (output.length > 0) {
-          output = this._removeAt(output, ...commonParams);
-        }
+        output = this._removeAt(output, ...commonParams);
       }
       // Handel SPACE
       else if (button === fnButton.SPACE) {
-        if (output.length < inputMaxLength) {
-          output = this._addStringAt(output, ' ', ...commonParams);
-        }
+        output = this._addStringAt(output, ' ', ...commonParams);
       }
       // Handel TAB
       else if (button === fnButton.TAB) {
-        if (output.length < inputMaxLength) {
-          output = this._addStringAt(output, '\t', ...commonParams);
-        }
+        output = this._addStringAt(output, '\t', ...commonParams);
       }
       // Handel ENTER
       else if (button === fnButton.ENTER) {
-        if (output.length < inputMaxLength) {
-          output = this._addStringAt(output, '\n', ...commonParams);
-        }
+        output = this._addStringAt(output, '\n', ...commonParams);
       }
       // Handel LAYOUT
       else {
@@ -523,6 +523,10 @@ export class NgxTouchKeyboardComponent {
     positionEnd = source.length,
     moveCaret = false
   ) {
+    if (this.maxLength !== -1 && source.length >= this.maxLength) {
+      return source;
+    }
+
     let output;
 
     if (!position && position !== 0) {
