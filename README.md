@@ -51,12 +51,13 @@ export class AppModule { }
 
 ## Localization
 
-AngularTouchKeyboard is localized in 4 keyboard-specific locales:
+AngularTouchKeyboard is localized in 5 keyboard-specific locales:
 
 * `en-US` English (United States) (default)
 * `en-UK` English (United Kingdom)
 * `fa-IR` Persian
 * `sv-SE` Swedish
+* `ka-GE` ქართული(Georgian)
 
 ## Usage
 
