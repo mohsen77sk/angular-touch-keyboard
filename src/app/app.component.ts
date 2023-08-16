@@ -21,8 +21,7 @@ export class AppComponent {
     { value: 'en-GB', name: 'English (UK)' },
     { value: 'fa-IR', name: 'Persian' },
     { value: 'sv-SE', name: 'Swedish' },
-    {value: 'ka-GE', name:'ქართული'},
-
+    { value: 'ka-GE', name: 'Georgian' },
   ];
 
   /**
