@@ -94,7 +94,7 @@ export class NgxTouchKeyboardComponent {
    * On pointerup (mouseup or touchend)
    */
   @HostListener('window:pointerup', ['$event'])
-  handleMouseUp(event: MouseEvent): void {
+  handleMouseUp(event: PointerEvent): void {
     this._caretEventHandler(event);
   }
 
@@ -244,9 +244,9 @@ export class NgxTouchKeyboardComponent {
    * @param button The button layout name.
    * @param event The button event.
    */
-  handleButtonClicked(button: string, e?: Event): void {
+  handleButtonPress(button: string, e?: Event): void {
     if (this.debug) {
-      console.log('Key pressed:', button);
+      console.log('Key press:', button);
     }
 
     if (button === fnButton.SHIFT) {
@@ -314,12 +314,16 @@ export class NgxTouchKeyboardComponent {
   }
 
   /**
-   * Handles button mousedown
+   * Handles button down
    *
    * @param button The button layout name.
    * @param event The button event.
    */
-  handleButtonMouseDown(button: string, e?: Event): void {
+  handleButtonDown(button: string, e?: Event): void {
+    if (this.debug) {
+      console.log('Key down:', button);
+    }
+
     if (e) {
       /**
        * Handle event options
@@ -349,21 +353,30 @@ export class NgxTouchKeyboardComponent {
           button === fnButton.SPACE)
       ) {
         if (this.debug) {
-          console.log('Button held:', button);
+          console.log('Button hold:', button);
         }
         this.handleButtonHold(button);
       }
       clearTimeout(this._holdTimeout);
     }, 500);
+
+    /**
+     * Handel button Click after button down
+     */
+    this.handleButtonPress(button, e);
   }
 
   /**
-   * Handles button mouseup
+   * Handles button up
    *
    * @param button The button layout name.
    * @param event The button event.
    */
-  handleButtonMouseUp(button: string, e?: Event): void {
+  handleButtonUp(button: string, e?: Event): void {
+    if (this.debug) {
+      console.log('Key up:', button);
+    }
+
     if (e) {
       /**
        * Handle event options
@@ -394,7 +407,7 @@ export class NgxTouchKeyboardComponent {
      */
     this._holdInteractionTimeout = window.setTimeout(() => {
       if (this._isMouseHold) {
-        this.handleButtonClicked(button);
+        this.handleButtonPress(button);
         this.handleButtonHold(button);
       } else {
         clearTimeout(this._holdInteractionTimeout);
@@ -650,7 +663,7 @@ export class NgxTouchKeyboardComponent {
       this._activeInputElement === document.activeElement
     ) {
       if (this._isMouseHold) {
-        this.handleButtonMouseUp('');
+        this.handleButtonUp('');
       }
       return;
     } else if (!isKeyboard && event?.type !== 'selectionchange') {

@@ -17,11 +17,9 @@
           class="touch-keyboard-key"
           [ngClass]="[getButtonClass(key)]"
           [attr.data-layout]="layoutMode"
-          (pointerdown)="
-            handleButtonClicked(key, $event); handleButtonMouseDown(key, $event)
-          "
-          (pointerup)="handleButtonMouseUp(key, $event)"
-          (pointercancel)="handleButtonMouseUp(key, $event)"
+          (pointerup)="handleButtonUp(key, $event)"
+          (pointerdown)="handleButtonDown(key, $event)"
+          (pointercancel)="handleButtonUp(key, $event)"
           [innerHtml]="getButtonDisplayName(key)"
         ></button>
       </ng-container>
