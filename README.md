@@ -41,8 +41,8 @@ export class AppModule { }
 
 #### Version [`3.0.0`]
 
-* `@angular/core`: `^16.0.0` || `^17.0.0`
-* `@angular/cdk`: `^16.0.0` || `^17.0.0`
+* `@angular/core`: `^16.0.0` || `^17.0.0` || `^18.0.0`
+* `@angular/cdk`: `^16.0.0` || `^17.0.0` || `^18.0.0`
 
 #### Version [`2.0.0`]
 
