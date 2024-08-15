@@ -173,9 +173,11 @@
       <mat-form-field appearance="outline" style="width: auto">
         <mat-label>Language</mat-label>
         <mat-select placeholder="Placeholder" [(value)]="language">
-          <mat-option *ngFor="let item of languages" [value]="item.value">
+          @for (item of languages; track item.value) {
+          <mat-option [value]="item.value">
             {{ item.name }}
           </mat-option>
+          }
         </mat-select>
       </mat-form-field>
 
