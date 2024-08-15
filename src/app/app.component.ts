@@ -22,6 +22,7 @@ export class AppComponent {
     { value: 'fa-IR', name: 'Persian' },
     { value: 'sv-SE', name: 'Swedish' },
     { value: 'ka-GE', name: 'Georgian' },
+    { value: 'ru-RU', name: 'Russian' },
   ];
 
   /**
