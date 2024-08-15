@@ -58,6 +58,7 @@ AngularTouchKeyboard is localized in 5 keyboard-specific locales:
 * `fa-IR` Persian (Iran)
 * `sv-SE` Swedish (Sweden)
 * `ka-GE` Georgian (Georgia)
+* `ru-RU` Russian (Russia)
 
 ## Usage
 
