@@ -1,55 +1,38 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
+@use "sass:map";
 @use "@angular/material" as mat;
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$touch-keyboard-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
-$touch-keyboard-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
-$touch-keyboard-warn: mat.m2-define-palette(mat.$m2-red-palette);
-$typography: mat.m2-define-typography-config();
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$light-theme: mat.m2-define-light-theme(
+$light-theme: mat.define-theme(
   (
     color: (
-      primary: $touch-keyboard-primary,
-      accent: $touch-keyboard-accent,
-      warn: $touch-keyboard-warn,
+      theme-type: light,
+      primary: mat.$azure-palette,
+      use-system-variables: true,
     ),
-    typography: $typography,
+  )
+);
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$azure-palette,
+      use-system-variables: true,
+    ),
   )
 );
 
-$dark-theme: mat.m2-define-dark-theme(
-  (
-    color: (
-      primary: $touch-keyboard-primary,
-      accent: $touch-keyboard-accent,
-      warn: $touch-keyboard-warn,
-    ),
-    typography: $typography,
-  )
-);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($light-theme);
-
-body.dark {
-  @include mat.all-component-colors($dark-theme);
+body {
+  @include mat.system-level-colors($light-theme);
+  @include mat.all-component-themes($light-theme);
 }
 
-/* HTML and Body default styles */
+body.dark {
+  @include mat.system-level-colors($dark-theme);
+}
+
+/* You can add global styles to this file, and also import other style files */
+
 html,
 body {
   display: flex;
@@ -68,4 +51,6 @@ html {
 body {
   font-size: 0.875rem;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--sys-on-surface);
+  background-color: var(--sys-surface-container);
 }
