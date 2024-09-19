@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <span> ngx-touch-keyboard </span>
   <sup>
     <small>v{{ version }}</small>
@@ -21,11 +21,9 @@
     matTooltip="Github"
     href="https://github.com/mohsen77sk/angular-touch-keyboard"
   >
-    <img
-      src="./assets/icons/github-circle-white-transparent.svg"
-      width="24"
-      height="24"
-    />
+    <mat-icon>
+      <img src="./assets/icons/github-circle-transparent.svg" />
+    </mat-icon>
   </a>
 </mat-toolbar>
 
@@ -175,9 +173,11 @@
       <mat-form-field appearance="outline" style="width: auto">
         <mat-label>Language</mat-label>
         <mat-select placeholder="Placeholder" [(value)]="language">
-          <mat-option *ngFor="let item of languages" [value]="item.value">
+          @for (item of languages; track item.value) {
+          <mat-option [value]="item.value">
             {{ item.name }}
           </mat-option>
+          }
         </mat-select>
       </mat-form-field>
 

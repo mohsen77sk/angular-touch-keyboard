@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-touch-keyboard:build:production"
+              "buildTarget": "angular-touch-keyboard:build:production"
             },
             "development": {
-              "browserTarget": "angular-touch-keyboard:build:development"
+              "buildTarget": "angular-touch-keyboard:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-touch-keyboard:build"
+            "buildTarget": "angular-touch-keyboard:build"
           }
         },
         "test": {
