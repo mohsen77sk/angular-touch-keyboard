@@ -20,6 +20,7 @@ export class AppComponent {
     { value: 'en-US', name: 'English (US)' },
     { value: 'en-GB', name: 'English (UK)' },
     { value: 'fa-IR', name: 'Persian' },
+    { value: 'he-IL', name: 'Hebrew' },
     { value: 'ka-GE', name: 'Georgian' },
     { value: 'ru-RU', name: 'Russian' },
     { value: 'sv-SE', name: 'Swedish' },
