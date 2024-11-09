@@ -66,6 +66,20 @@
 
       <div style="margin-bottom: 2rem"></div>
 
+      <span>Open with focus and accept click event</span>
+      <div class="native-input">
+        <input
+          type="text"
+          ngxTouchKeyboard
+          ngxTouchKeyboardDebug
+          #basic2TouchKeyboard1="ngxTouchKeyboard"
+          (acceptClick)="acceptClick($event)"
+          [validate]="validateNumber"
+        />
+      </div>
+
+      <div style="margin-bottom: 2rem"></div>
+
       <span>Open with focus (Fullscreen mode)</span>
       <div class="native-input">
         <input

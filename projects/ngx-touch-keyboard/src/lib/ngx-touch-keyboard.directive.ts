@@ -2,9 +2,11 @@ import {
   ComponentRef,
   Directive,
   ElementRef,
+  EventEmitter,
   Inject,
   Input,
   OnDestroy,
+  Output,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -16,6 +18,7 @@ import {
   PositionStrategy,
 } from '@angular/cdk/overlay';
 import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
+import { fnButton } from './Locale/constants';
 
 @Directive({
   selector: 'input[ngxTouchKeyboard], textarea[ngxTouchKeyboard]',
@@ -23,6 +26,9 @@ import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
 })
 export class NgxTouchKeyboardDirective implements OnDestroy {
   isOpen = false;
+  @Output() acceptClick: EventEmitter<NgxTouchKeyboardComponent>;
+  
+  @Input() validate!: ((args: string|undefined) => boolean) | undefined;
 
   private _locale!: string;
   /** locale */
@@ -64,7 +70,17 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     private _overlay: Overlay,
     private _elementRef: ElementRef<HTMLInputElement>,
     @Inject(DOCUMENT) private _document: any
-  ) {}
+  ) {
+
+    this.acceptClick = new EventEmitter<NgxTouchKeyboardComponent>();
+    this._elementRef.nativeElement.addEventListener('blur', () => {
+      this.blurEventHandler();
+    });
+    this._elementRef.nativeElement.addEventListener('focus', () => {
+      this.openPanel();
+    });
+        
+  }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks
@@ -123,16 +139,36 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     this._panelRef.instance.debug = this.ngxTouchKeyboardDebug;
     this._panelRef.instance.setLocale(this._locale);
     this._panelRef.instance.setActiveInput(this._elementRef.nativeElement);
+    //We initialize the text before accept to keep the last change, 
+    //If there is validation process for the text input and the user insert wrong text
+    //Then We need return to the previous text. 
+    this._panelRef.instance.setTextBeforeAccept();
     this.isOpen = true;
 
     // Reference the input element
     this._panelRef.instance.closePanel.subscribe(() => this.closePanel());
+    this._panelRef.instance.acceptClick.subscribe((element) => {
+      this.acceptClick.emit(element);
+    } );
+    this._panelRef.instance.validate = this.validate;
+
+  }
+  blurEventHandler()
+  {
+    this._panelRef.instance.handleButtonPress(fnButton.DONE);
+    //this.closePanel();
   }
 
   /**
    * Close keyboard panel
    */
   closePanel(): void {
+    //The problem is that when I want to display the keyboard again 
+    //I have to lose focus from the text input 
+    //(by clicking on the screen outside the text input) and then when 
+    //I click on the text input the keyboard will appear...
+    //To deal with this problem we makes focus out by calling blur method 
+    this._panelRef.instance.getActiveInputElement()?.blur();
     this._overlayRef.detach();
     this.isOpen = false;
   }
