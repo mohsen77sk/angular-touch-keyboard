@@ -40,6 +40,7 @@
         <input
           type="text"
           ngxTouchKeyboard
+          ngxTouchKeyboardOpenWithButton
           #basicTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -77,6 +78,21 @@
           [validate]="validateNumber"
         />
       </div>
+      <div style="margin-bottom: 2rem"></div>
+
+
+      <span>text label that replace to text input</span>
+      <div class="native-input" style="color: rgb(177, 106, 44);">
+        <div
+          ngxTouchKeyboard="en-US"
+          ngxTouchKeyboardDebug
+          #basic2TouchKeyboard1="ngxTouchKeyboard"
+          (acceptClick)="acceptClick($event)"
+        >
+        when you click on me you can change me
+        </div>
+      </div>
+
 
       <div style="margin-bottom: 2rem"></div>
 
@@ -117,6 +133,7 @@
           matInput
           type="text"
           ngxTouchKeyboard
+          ngxTouchKeyboardOpenWithButton
           #materialTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -201,6 +218,7 @@
           matInput
           type="text"
           [ngxTouchKeyboard]="language"
+          ngxTouchKeyboardOpenWithButton
           #defaultTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -220,6 +238,7 @@
           type="text"
           inputmode="search"
           [ngxTouchKeyboard]="language"
+          ngxTouchKeyboardOpenWithButton
           #searchTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -239,6 +258,7 @@
           type="text"
           inputmode="email"
           [ngxTouchKeyboard]="language"
+          ngxTouchKeyboardOpenWithButton
           #emailTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -258,6 +278,7 @@
           type="text"
           inputmode="url"
           [ngxTouchKeyboard]="language"
+          ngxTouchKeyboardOpenWithButton
           #urlTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -277,6 +298,7 @@
           type="text"
           inputmode="numeric"
           [ngxTouchKeyboard]="language"
+          ngxTouchKeyboardOpenWithButton
           #numericTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -296,6 +318,7 @@
           type="text"
           inputmode="decimal"
           [ngxTouchKeyboard]="language"
+          ngxTouchKeyboardOpenWithButton
           #decimalTouchKeyboard="ngxTouchKeyboard"
         />
         <button
@@ -315,6 +338,7 @@
           type="text"
           inputmode="tel"
           [ngxTouchKeyboard]="language"
+          ngxTouchKeyboardOpenWithButton
           #telTouchKeyboard="ngxTouchKeyboard"
         />
         <button

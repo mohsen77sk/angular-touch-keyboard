@@ -21,14 +21,14 @@ import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
 import { fnButton } from './Locale/constants';
 
 @Directive({
-  selector: 'input[ngxTouchKeyboard], textarea[ngxTouchKeyboard]',
+  selector: 'input[ngxTouchKeyboard], textarea[ngxTouchKeyboard], div[ngxTouchKeyboard]',
   exportAs: 'ngxTouchKeyboard',
 })
 export class NgxTouchKeyboardDirective implements OnDestroy {
   isOpen = false;
   @Output() acceptClick: EventEmitter<NgxTouchKeyboardComponent>;
-  
-  @Input() validate!: ((args: string|undefined) => boolean) | undefined;
+
+  @Input() validate!: ((args: string | undefined) => boolean) | undefined;
 
   private _locale!: string;
   /** locale */
@@ -38,6 +38,26 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
   }
   set ngxTouchKeyboard(value: string) {
     this._locale = value;
+  }
+
+  private _divMode!: boolean;
+  /** div mode */
+  @Input()
+  get ngxTouchKeyboardDiv() {
+    return this._divMode;
+  }
+  set ngxTouchKeyboardDiv(value: any) {
+    this._divMode = coerceBooleanProperty(value);
+  }
+
+  private _openWithButton!: boolean;
+  /** open virtual keyboard with button instead of focus on text input*/
+  @Input()
+  get ngxTouchKeyboardOpenWithButton() {
+    return this._openWithButton;
+  }
+  set ngxTouchKeyboardOpenWithButton(value: any) {
+    this._openWithButton = coerceBooleanProperty(value);
   }
 
   private _debugMode!: boolean;
@@ -69,17 +89,27 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
   constructor(
     private _overlay: Overlay,
     private _elementRef: ElementRef<HTMLInputElement>,
+    private _elementDivRef: ElementRef<HTMLDivElement>,
     @Inject(DOCUMENT) private _document: any
   ) {
 
     this.acceptClick = new EventEmitter<NgxTouchKeyboardComponent>();
-    this._elementRef.nativeElement.addEventListener('blur', () => {
-      this.blurEventHandler();
-    });
-    this._elementRef.nativeElement.addEventListener('focus', () => {
-      this.openPanel();
-    });
-        
+
+    if (this._elementRef.nativeElement.type != undefined) {
+      this._elementRef.nativeElement.addEventListener('blur', () => {
+        this.blurEventHandler();
+      });
+      this._elementRef.nativeElement.addEventListener('focus', () => {
+        if (!this.ngxTouchKeyboardOpenWithButton)
+          this.openPanel();
+      });
+    }
+    else {
+
+      this.ngxTouchKeyboardDiv = true;
+      this._declareDivEvents();
+    }
+
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -149,12 +179,11 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     this._panelRef.instance.closePanel.subscribe(() => this.closePanel());
     this._panelRef.instance.acceptClick.subscribe((element) => {
       this.acceptClick.emit(element);
-    } );
+    });
     this._panelRef.instance.validate = this.validate;
 
   }
-  blurEventHandler()
-  {
+  blurEventHandler() {
     this._panelRef.instance.handleButtonPress(fnButton.DONE);
     //this.closePanel();
   }
@@ -171,6 +200,9 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     this._panelRef.instance.getActiveInputElement()?.blur();
     this._overlayRef.detach();
     this.isOpen = false;
+    //We check if We in div mode, then We need to return from input text right to div content
+    if (this.ngxTouchKeyboardDiv)
+      this._replaceInputToDivElement();
   }
 
   /**
@@ -288,5 +320,41 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
 
     // Return input
     return element;
+  }
+  /**
+   * Create the overlay
+   *
+   * @private
+   */
+  private _declareDivEvents(): void {
+    this._elementDivRef.nativeElement.addEventListener('click', () => {
+      const element: HTMLInputElement = document.createElement('input');
+      this._elementRef.nativeElement = element;
+      this._elementRef.nativeElement.value = this._elementDivRef.nativeElement.innerHTML;
+      this._elementDivRef.nativeElement.innerHTML = '';
+      this._elementRef.nativeElement.addEventListener('blur', () => {
+        this.blurEventHandler();
+      });
+      this._elementRef.nativeElement.addEventListener('focus', () => {
+        if (!this.ngxTouchKeyboardOpenWithButton)
+          this.openPanel();
+      });
+
+      this._elementDivRef.nativeElement.appendChild(this._elementRef.nativeElement);
+      if (this._elementDivRef.nativeElement.removeAllListeners)
+        this._elementDivRef.nativeElement.removeAllListeners('click');
+      this._elementRef.nativeElement.focus();
+
+    });
+  }
+
+  /**
+   * Create the overlay
+   *
+   * @private
+   */
+  private _replaceInputToDivElement(): void {
+    this._elementDivRef.nativeElement.innerHTML = this._elementRef.nativeElement.value;
+    this._declareDivEvents();
   }
 }
