@@ -29,6 +29,16 @@ export class NgxTouchKeyboardComponent {
   debug = false;
 
   @Output() closePanel = new EventEmitter<void>();
+  //This event that come from the application, and deal with accept click.
+  //With this event we can declare the method that treatment with this event in the parent app 
+  @Output() acceptClick: EventEmitter<NgxTouchKeyboardComponent>;
+  //This method responsible validate the input text value.
+  //For example if you wont to accept only numbers input.
+  validate: ((args: string | undefined) => boolean) | undefined;
+  //This variable declare for us if We make changing text value after We click on 'accept' button,
+  //If We click on 'accept' button and We pass the validation then We need to change the final text value
+  //Otherwise (if We not passing the validation process) then We need to return back to the previous text.       
+  textBeforeAccept: string = '';
 
   private _activeButtonClass = 'active';
   private _holdInteractionTimeout!: number;
@@ -45,7 +55,10 @@ export class NgxTouchKeyboardComponent {
     private _sanitizer: DomSanitizer,
     private _elementRef: ElementRef<HTMLInputElement>,
     @Inject(LOCALE_ID) private _defaultLocale: string
-  ) {}
+  ) {
+
+    this.acceptClick = new EventEmitter<NgxTouchKeyboardComponent>();
+  }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors
@@ -191,7 +204,25 @@ export class NgxTouchKeyboardComponent {
 
     // And set focus to input
     this._focusActiveInput();
+    //When we setting
+    this._activeInputElement.select();
   }
+
+  /**
+   * Copy the value text from the input text element 
+   */
+setTextBeforeAccept(): void {
+  this.textBeforeAccept = this._activeInputElement != undefined ? this._activeInputElement.value : '';
+}
+
+
+  /**
+   * Get the active input text element
+   */
+  getActiveInputElement(): HTMLInputElement | HTMLTextAreaElement | null {
+    return this._activeInputElement;
+  }
+
 
   /**
    * Check whether the button is a standard button
@@ -253,7 +284,30 @@ export class NgxTouchKeyboardComponent {
       this.layoutName =
         this.layoutName === 'alphabetic' ? 'shift' : 'alphabetic';
       return;
-    } else if (button === fnButton.DONE) {
+    } 
+    else if (button === fnButton.DONE) { 
+      //If we click on 'done' button we need to check the value before We close the keyboard panel 
+      if (this.validate) { //If there is validation method declarations 
+        if (this.validate(this._activeInputElement?.value)) { //If the validation pass then
+          //We accept the value changed
+          this.textBeforeAccept = this._activeInputElement != undefined ? this._activeInputElement.value : '';
+          //We calling to accept method to make any thing you wont and declare at this 'accept' method
+          this.acceptClick.emit(this);
+        }
+        else //If the validation not pass then
+        {
+          //We need return to the previous text
+          //For example if we accept only number and the text value was '222' and we changed him to '222ttg' value
+          //Then we will return to '222' number 
+          if(this._activeInputElement != null && this._activeInputElement)
+            this._activeInputElement.value =  this.textBeforeAccept;
+        }
+      }
+      else {
+        //If there is no validation method then we accept any text and setting him and calling to 'accept' method to make any thing you wont
+        this.textBeforeAccept = this._activeInputElement ? this._activeInputElement.value : '';
+        this.acceptClick.emit(this);
+      }
       this.closePanel.emit();
       return;
     }

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import packageJson from '../../projects/ngx-touch-keyboard/package.json';
 
 import { MaterialDialogExampleComponent } from './material-dialog-example/material-dialog-example.component';
+import { NgxTouchKeyboardComponent } from 'ngx-touch-keyboard';
 
 @Component({
   selector: 'app-root',
@@ -73,6 +74,20 @@ export class AppComponent {
     });
   }
 
+
+  /**
+   * Accept click
+   */
+  acceptClick(element: NgxTouchKeyboardComponent): void {
+    console.info('acceptClick:' + element.getActiveInputElement()?.value);
+    //alert('yes');
+  }
+  public validateNumber(value: string|undefined): boolean {
+    if (!isNaN(parseFloat(String(value))) && isFinite(Number(value)))
+      return true;
+    else
+      return false;
+  }
   // -----------------------------------------------------------------------------------------------------
   // @ Private methods
   // -----------------------------------------------------------------------------------------------------
