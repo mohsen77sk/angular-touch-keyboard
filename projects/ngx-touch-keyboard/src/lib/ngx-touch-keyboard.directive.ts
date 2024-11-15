@@ -328,23 +328,26 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
    */
   private _declareDivEvents(): void {
     this._elementDivRef.nativeElement.addEventListener('click', () => {
-      const element: HTMLInputElement = document.createElement('input');
-      this._elementRef.nativeElement = element;
-      this._elementRef.nativeElement.value = this._elementDivRef.nativeElement.innerHTML;
-      this._elementDivRef.nativeElement.innerHTML = '';
-      this._elementRef.nativeElement.addEventListener('blur', () => {
-        this.blurEventHandler();
-      });
-      this._elementRef.nativeElement.addEventListener('focus', () => {
-        if (!this.ngxTouchKeyboardOpenWithButton)
-          this.openPanel();
-      });
+      //When we click on the div element, We need to check if the virtual keyboard is open
+      //because We wont to prevent from the click listener to action when we press on the virtual keyboard
+      if (!this.isOpen) {
+        const element: HTMLInputElement = document.createElement('input');
+        this._elementRef.nativeElement = element;
+        this._elementRef.nativeElement.value = this._elementDivRef.nativeElement.innerHTML;
+        this._elementDivRef.nativeElement.innerHTML = '';
+        this._elementRef.nativeElement.addEventListener('blur', () => {
+          this.blurEventHandler();
+        });
+        this._elementRef.nativeElement.addEventListener('focus', () => {
+          if (!this.ngxTouchKeyboardOpenWithButton)
+            this.openPanel();
+        });
 
-      this._elementDivRef.nativeElement.appendChild(this._elementRef.nativeElement);
-      if (this._elementDivRef.nativeElement.removeAllListeners)
-        this._elementDivRef.nativeElement.removeAllListeners('click');
-      this._elementRef.nativeElement.focus();
-
+        this._elementDivRef.nativeElement.appendChild(this._elementRef.nativeElement);
+        // if (this._elementDivRef.nativeElement.removeAllListeners)
+        //   this._elementDivRef.nativeElement.removeAllListeners('click');
+        this._elementRef.nativeElement.focus();
+      }
     });
   }
 
