@@ -2,11 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
-  Inject,
+  inject,
   LOCALE_ID,
-  Output,
+  output,
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -23,12 +22,16 @@ import * as Locales from './Locale';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxTouchKeyboardComponent {
+  private _sanitizer = inject(DomSanitizer);
+  private _elementRef = inject(ElementRef<HTMLInputElement>);
+  private _defaultLocale = inject(LOCALE_ID);
+
   locale: Locale = Locales.enUS;
   layoutMode = 'text';
   layoutName = 'alphabetic';
   debug = false;
 
-  @Output() closePanel = new EventEmitter<void>();
+  closePanel = output<void>();
 
   private _activeButtonClass = 'active';
   private _holdInteractionTimeout!: number;
@@ -37,15 +40,6 @@ export class NgxTouchKeyboardComponent {
   private _caretPosition: number | null = null;
   private _caretPositionEnd: number | null = null;
   private _activeInputElement!: HTMLInputElement | HTMLTextAreaElement | null;
-
-  /**
-   * Constructor
-   */
-  constructor(
-    private _sanitizer: DomSanitizer,
-    private _elementRef: ElementRef<HTMLInputElement>,
-    @Inject(LOCALE_ID) private _defaultLocale: string
-  ) {}
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors

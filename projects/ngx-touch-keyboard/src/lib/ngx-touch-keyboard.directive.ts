@@ -1,14 +1,15 @@
 import {
+  booleanAttribute,
   ComponentRef,
   Directive,
   ElementRef,
-  Inject,
-  Input,
+  inject,
+  input,
   OnDestroy,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Direction } from '@angular/cdk/bidi';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   Overlay,
   OverlayRef,
@@ -22,49 +23,28 @@ import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
   exportAs: 'ngxTouchKeyboard',
 })
 export class NgxTouchKeyboardDirective implements OnDestroy {
+  private _overlay = inject(Overlay);
+  private _document = inject(DOCUMENT);
+  private _elementRef = inject(ElementRef<HTMLInputElement>);
+
   isOpen = false;
 
-  private _locale!: string;
-  /** locale */
-  @Input()
-  get ngxTouchKeyboard() {
-    return this._locale;
-  }
-  set ngxTouchKeyboard(value: string) {
-    this._locale = value;
-  }
+  locale = input.required<string>({
+    alias: 'ngxTouchKeyboard',
+  });
 
-  private _debugMode!: boolean;
-  /** debug mode */
-  @Input()
-  get ngxTouchKeyboardDebug() {
-    return this._debugMode;
-  }
-  set ngxTouchKeyboardDebug(value: any) {
-    this._debugMode = coerceBooleanProperty(value);
-  }
+  debugMode = input(false, {
+    alias: 'ngxTouchKeyboardDebug',
+    transform: booleanAttribute,
+  });
 
-  private _fullScreenMode!: boolean;
-  /** fullscreen mode */
-  @Input()
-  get ngxTouchKeyboardFullScreen() {
-    return this._fullScreenMode;
-  }
-  set ngxTouchKeyboardFullScreen(value: any) {
-    this._fullScreenMode = coerceBooleanProperty(value);
-  }
+  fullScreenMode = input(false, {
+    alias: 'ngxTouchKeyboardFullScreen',
+    transform: booleanAttribute,
+  });
 
   private _overlayRef!: OverlayRef;
   private _panelRef!: ComponentRef<NgxTouchKeyboardComponent>;
-
-  /**
-   * Constructor
-   */
-  constructor(
-    private _overlay: Overlay,
-    private _elementRef: ElementRef<HTMLInputElement>,
-    @Inject(DOCUMENT) private _document: any
-  ) {}
 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks
@@ -100,28 +80,28 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
 
     // Set overlay class
     this._overlayRef.addPanelClass('ngx-touch-keyboard-overlay-pane');
-    if (this.ngxTouchKeyboardFullScreen)
+    if (this.fullScreenMode())
       this._overlayRef.addPanelClass('ngx-touch-keyboard-fullScreen');
 
     // Update direction the overlay
     this._overlayRef.setDirection(
-      this._document.body.getAttribute('dir') || this._document.dir || 'ltr'
+      (this._document.body.getAttribute('dir') ||
+        this._document.dir ||
+        'ltr') as Direction
     );
     // Update position the overlay
     this._overlayRef.updatePositionStrategy(
-      this._getPositionStrategy(this.ngxTouchKeyboardFullScreen)
+      this._getPositionStrategy(this.fullScreenMode())
     );
     // Update size the overlay
-    this._overlayRef.updateSize(
-      this._getOverlaySize(this.ngxTouchKeyboardFullScreen)
-    );
+    this._overlayRef.updateSize(this._getOverlaySize(this.fullScreenMode()));
 
     // Attach the portal to the overlay
     this._panelRef = this._overlayRef.attach(
       new ComponentPortal(NgxTouchKeyboardComponent)
     );
-    this._panelRef.instance.debug = this.ngxTouchKeyboardDebug;
-    this._panelRef.instance.setLocale(this._locale);
+    this._panelRef.instance.debug = this.debugMode();
+    this._panelRef.instance.setLocale(this.locale());
     this._panelRef.instance.setActiveInput(this._elementRef.nativeElement);
     this.isOpen = true;
 
