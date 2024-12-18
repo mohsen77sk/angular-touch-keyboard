@@ -198,6 +198,26 @@
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Full Screen</mat-label>
+        <input
+          matInput
+          type="text"
+          [ngxTouchKeyboard]="language"
+          ngxTouchKeyboardFullScreen
+          #langFullscreenTouchKeyboard="ngxTouchKeyboard"
+          (focus)="langFullscreenTouchKeyboard.openPanel()"
+          (blur)="langFullscreenTouchKeyboard.closePanel()"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="langFullscreenTouchKeyboard.togglePanel()"
+        >
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Search</mat-label>
