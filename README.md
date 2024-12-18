@@ -41,48 +41,39 @@ export class AppModule { }
 
 #### Version [`3.0.0`]
 
-* `@angular/core`: `^16.0.0` || `^17.0.0` || `^18.0.0`
-* `@angular/cdk`: `^16.0.0` || `^17.0.0` || `^18.0.0`
+- `@angular/core`: `^16.0.0` || `^17.0.0` || `^18.0.0`
+- `@angular/cdk`: `^16.0.0` || `^17.0.0` || `^18.0.0`
 
 #### Version [`2.0.0`]
 
-* `@angular/core`: `^14.0.0` || `^15.0.0`
-* `@angular/cdk`: `^14.0.0` || `^15.0.0`
+- `@angular/core`: `^14.0.0` || `^15.0.0`
+- `@angular/cdk`: `^14.0.0` || `^15.0.0`
 
 ## Localization
 
 AngularTouchKeyboard is localized in 7 keyboard-specific locales:
 
-* `en-US` English (United States) (default)
-* `en-UK` English (United Kingdom)
-* `fa-IR` Persian (Iran)
-* `he-IL` Hebrew (Israel)
-* `ka-GE` Georgian (Georgia)
-* `ru-RU` Russian (Russia)
-* `sv-SE` Swedish (Sweden)
+- `en-US` English (United States) (default)
+- `en-UK` English (United Kingdom)
+- `fa-IR` Persian (Iran)
+- `he-IL` Hebrew (Israel)
+- `ka-GE` Georgian (Georgia)
+- `ru-RU` Russian (Russia)
+- `sv-SE` Swedish (Sweden)
+- `hu-HU` Hungarian (Magyar)
 
 ## Usage
 
 Simple usage example
 
 ```html
-<input
-  type="text"
-  ngxTouchKeyboard
-  #touchKeyboard="ngxTouchKeyboard"
-  (focus)="touchKeyboard.openPanel()"
-/>
+<input type="text" ngxTouchKeyboard #touchKeyboard="ngxTouchKeyboard" (focus)="touchKeyboard.openPanel()" />
 ```
 
 Locale usage example
 
 ```html
-<input
-  type="text"
-  ngxTouchKeyboard="fa-IR"
-  #touchKeyboard="ngxTouchKeyboard"
-  (focus)="touchKeyboard.openPanel()"
-/>
+<input type="text" ngxTouchKeyboard="fa-IR" #touchKeyboard="ngxTouchKeyboard" (focus)="touchKeyboard.openPanel()" />
 ```
 
 Material usage example
@@ -90,18 +81,8 @@ Material usage example
 ```html
 <mat-form-field>
   <mat-label>Default</mat-label>
-  <input
-    matInput
-    type="text"
-    ngxTouchKeyboard
-    #touchKeyboard="ngxTouchKeyboard"
-  />
-  <button
-    mat-icon-button
-    matSuffix
-    type="button"
-    (click)="touchKeyboard.togglePanel()"
-  >
+  <input matInput type="text" ngxTouchKeyboard #touchKeyboard="ngxTouchKeyboard" />
+  <button mat-icon-button matSuffix type="button" (click)="touchKeyboard.togglePanel()">
     <mat-icon> keyboard </mat-icon>
   </button>
 </mat-form-field>
@@ -129,8 +110,8 @@ Here's the list of all available methods:
 
 ### Built-in themes
 
-* `default`: white theme
-* `dark`: dark theme
+- `default`: white theme
+- `dark`: dark theme
 
 You must put the class `dark` in the body to use the `dark` theme.
 
@@ -164,8 +145,8 @@ Depends on attribute inputmode, the keyboard layout is changed.
 
 The most useful commands for development are:
 
-* `npm run start` to start a development server
-* `npm run build-demo` to build the demo locally (it will be published automatically by GitHub Actions)
+- `npm run start` to start a development server
+- `npm run build-demo` to build the demo locally (it will be published automatically by GitHub Actions)
 
 ## License
 
