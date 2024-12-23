@@ -21,10 +21,10 @@ export class AppComponent {
     { value: 'en-GB', name: 'English (UK)' },
     { value: 'fa-IR', name: 'Persian' },
     { value: 'he-IL', name: 'Hebrew' },
+    { value: 'hu-HU', name: 'Hungarian' },
     { value: 'ka-GE', name: 'Georgian' },
     { value: 'ru-RU', name: 'Russian' },
     { value: 'sv-SE', name: 'Swedish' },
-    { value: 'hu-HU', name: 'Hungarian' },
   ];
 
   /**
