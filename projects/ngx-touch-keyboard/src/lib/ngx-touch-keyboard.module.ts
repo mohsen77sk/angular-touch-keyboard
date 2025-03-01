@@ -1,14 +1,25 @@
+import { NgClass } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
+import { OverlayModule } from '@angular/cdk/overlay';
 
-import { NgxTouchKeyboardDirective } from './ngx-touch-keyboard.directive';
+import {
+  NgxTouchKeyboardOrigin,
+  NgxTouchKeyboardDirective,
+} from './ngx-touch-keyboard.directive';
 import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
 
 @NgModule({
-  declarations: [NgxTouchKeyboardDirective, NgxTouchKeyboardComponent],
-  imports: [CommonModule, OverlayModule, PortalModule],
-  exports: [NgxTouchKeyboardDirective, NgxTouchKeyboardComponent],
+  imports: [NgClass, PortalModule, OverlayModule],
+  declarations: [
+    NgxTouchKeyboardOrigin,
+    NgxTouchKeyboardDirective,
+    NgxTouchKeyboardComponent,
+  ],
+  exports: [
+    NgxTouchKeyboardOrigin,
+    NgxTouchKeyboardDirective,
+    NgxTouchKeyboardComponent,
+  ],
 })
 export class NgxTouchKeyboardModule {}

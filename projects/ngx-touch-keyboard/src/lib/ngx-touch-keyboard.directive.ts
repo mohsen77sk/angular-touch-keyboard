@@ -16,6 +16,22 @@ import {
 } from '@angular/cdk/overlay';
 import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
 
+/**
+ * Directive applied to an element to make it usable as an origin for an keyboard using a
+ * ConnectedPositionStrategy.
+ */
+@Directive({
+  selector: '[ngxTouchKeyboardOrigin]',
+  exportAs: 'ngxTouchKeyboardOrigin',
+})
+export class NgxTouchKeyboardOrigin {
+  elementRef = inject(ElementRef);
+}
+
+/**
+ * This directive provides methods to open, close, and toggle the touch keyboard panel.
+ * It also handles the creation and configuration of the overlay used to display the keyboard.
+ */
 @Directive({
   selector: 'input[ngxTouchKeyboard], textarea[ngxTouchKeyboard]',
   exportAs: 'ngxTouchKeyboard',
@@ -23,8 +39,6 @@ import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
 export class NgxTouchKeyboardDirective implements OnDestroy {
   private _overlay = inject(Overlay);
   private _elementRef = inject(ElementRef<HTMLInputElement>);
-
-  isOpen = false;
 
   locale = input.required<string>({
     alias: 'ngxTouchKeyboard',
@@ -40,6 +54,11 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     transform: booleanAttribute,
   });
 
+  origin = input<NgxTouchKeyboardOrigin | null>(null, {
+    alias: 'ngxConnectedTouchKeyboardOrigin',
+  });
+
+  private _isOpen = false;
   private _overlayRef!: OverlayRef;
   private _panelRef!: ComponentRef<NgxTouchKeyboardComponent>;
 
@@ -97,7 +116,7 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     this._panelRef.instance.debug = this.debugMode();
     this._panelRef.instance.setLocale(this.locale());
     this._panelRef.instance.setActiveInput(this._elementRef.nativeElement);
-    this.isOpen = true;
+    this._isOpen = true;
 
     // Reference the input element
     this._panelRef.instance.closePanel.subscribe(() => this.closePanel());
@@ -108,14 +127,14 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
    */
   closePanel(): void {
     this._overlayRef.detach();
-    this.isOpen = false;
+    this._isOpen = false;
   }
 
   /**
    * Toggle keyboard panel
    */
   togglePanel(): void {
-    if (this.isOpen) {
+    if (this._isOpen) {
       this.closePanel();
     } else {
       this.openPanel();
@@ -153,9 +172,9 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
 
     return this._overlay
       .position()
-      .flexibleConnectedTo(this._inputOrigin())
-      .withLockedPosition(true)
-      .withPush(true)
+      .flexibleConnectedTo(this._getOriginElement())
+      .withLockedPosition()
+      .withPush()
       .withPositions([
         {
           originX: 'start',
@@ -200,29 +219,33 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     }
 
     return {
-      width: this._inputOrigin().getBoundingClientRect().width,
-      maxWidth: this._inputOrigin().getBoundingClientRect().width,
+      width: this._getOriginElement().getBoundingClientRect().width,
+      maxWidth: this._getOriginElement().getBoundingClientRect().width,
       minWidth: '260px',
     };
   }
 
   /**
-   * Get input origin
+   * Gets the origin element for the keyboard panel.
    *
    * @private
    */
-  private _inputOrigin(): any {
+  private _getOriginElement(): any {
+    if (this.origin()) {
+      return this.origin()?.elementRef.nativeElement;
+    }
+
     const element = this._elementRef.nativeElement;
 
-    // Material form field - Check input in mat-form-field
+    // Material form field <= v14
     if (element.classList.contains('mat-input-element')) {
       // Return [mat-form-field-flex] element
       return element.parentNode?.parentNode;
     }
 
-    // Material form field - Check input in mat-form-field
+    // Material form field > v14
     if (element.classList.contains('mat-mdc-input-element')) {
-      // Return [mat-form-field] element
+      // Return [mat-mdc-text-field-wrapper] element
       return element.parentNode?.parentNode?.parentNode;
     }
 
