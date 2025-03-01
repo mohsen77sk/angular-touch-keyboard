@@ -7,8 +7,6 @@ import {
   input,
   OnDestroy,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { Direction } from '@angular/cdk/bidi';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
   Overlay,
@@ -24,7 +22,6 @@ import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
 })
 export class NgxTouchKeyboardDirective implements OnDestroy {
   private _overlay = inject(Overlay);
-  private _document = inject(DOCUMENT);
   private _elementRef = inject(ElementRef<HTMLInputElement>);
 
   isOpen = false;
@@ -79,20 +76,17 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     }
 
     // Set overlay class
-    this._overlayRef.addPanelClass('ngx-touch-keyboard-overlay-pane');
-    if (this.fullScreenMode())
+    if (this.fullScreenMode()) {
       this._overlayRef.addPanelClass('ngx-touch-keyboard-fullScreen');
+    } else {
+      this._overlayRef.removePanelClass('ngx-touch-keyboard-fullScreen');
+    }
 
-    // Update direction the overlay
-    this._overlayRef.setDirection(
-      (this._document.body.getAttribute('dir') ||
-        this._document.dir ||
-        'ltr') as Direction
-    );
     // Update position the overlay
     this._overlayRef.updatePositionStrategy(
       this._getPositionStrategy(this.fullScreenMode())
     );
+
     // Update size the overlay
     this._overlayRef.updateSize(this._getOverlaySize(this.fullScreenMode()));
 
@@ -139,7 +133,9 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
    */
   private _createOverlay(): void {
     this._overlayRef = this._overlay.create({
+      direction: 'ltr',
       hasBackdrop: false,
+      panelClass: 'ngx-touch-keyboard-overlay-pane',
       scrollStrategy: this._overlay.scrollStrategies.noop(),
     });
   }
