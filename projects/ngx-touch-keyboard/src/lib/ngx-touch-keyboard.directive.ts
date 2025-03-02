@@ -2,9 +2,11 @@ import {
   booleanAttribute,
   ComponentRef,
   Directive,
+  effect,
   ElementRef,
   inject,
   input,
+  model,
   OnDestroy,
 } from '@angular/core';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -44,6 +46,10 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     alias: 'ngxTouchKeyboard',
   });
 
+  open = model(false, {
+    alias: 'ngxTouchKeyboardOpen',
+  });
+
   debugMode = input(false, {
     alias: 'ngxTouchKeyboardDebug',
     transform: booleanAttribute,
@@ -58,9 +64,17 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     alias: 'ngxConnectedTouchKeyboardOrigin',
   });
 
-  private _isOpen = false;
   private _overlayRef!: OverlayRef;
   private _panelRef!: ComponentRef<NgxTouchKeyboardComponent>;
+
+  /**
+   * constructor
+   */
+  constructor() {
+    effect(() => {
+      this.open() ? this.openPanel() : this.closePanel();
+    });
+  }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks
@@ -116,25 +130,23 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     this._panelRef.instance.debug = this.debugMode();
     this._panelRef.instance.setLocale(this.locale());
     this._panelRef.instance.setActiveInput(this._elementRef.nativeElement);
-    this._isOpen = true;
-
-    // Reference the input element
     this._panelRef.instance.closePanel.subscribe(() => this.closePanel());
+    this.open.set(true);
   }
 
   /**
    * Close keyboard panel
    */
   closePanel(): void {
-    this._overlayRef.detach();
-    this._isOpen = false;
+    this._overlayRef?.detach();
+    this.open.set(false);
   }
 
   /**
    * Toggle keyboard panel
    */
   togglePanel(): void {
-    if (this._isOpen) {
+    if (this.open()) {
       this.closePanel();
     } else {
       this.openPanel();
