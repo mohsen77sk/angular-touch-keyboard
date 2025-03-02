@@ -109,11 +109,13 @@ Material usage example
 
 ### Properties
 
-| Property                     | Description                                                 |
-| ---------------------------- | ----------------------------------------------------------- |
-| `ngxTouchKeyboard`           | Required to initialize Virtual Keyboard to specified input. |
-| `ngxTouchKeyboardDebug`      | Debug mode is on.                                           |
-| `ngxTouchKeyboardFullScreen` | Full screen mode is on.                                     |
+| Property                          | Description                                                 |
+| --------------------------------- | ----------------------------------------------------------- |
+| `ngxTouchKeyboard`                | Required to initialize Virtual Keyboard to specified input. |
+| `ngxTouchKeyboardOpen`            | Whether the overlay is open.                                |
+| `ngxTouchKeyboardDebug`           | Debug mode is on.                                           |
+| `ngxTouchKeyboardFullScreen`      | Overlay mode to fullscreen.                                 |
+| `ngxConnectedTouchKeyboardOrigin` | Origin for the connected overlay.                           |
 
 ### Methods
 
