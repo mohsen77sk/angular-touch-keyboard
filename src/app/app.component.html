@@ -6,21 +6,13 @@
 
   <div style="flex: 1 1 auto"></div>
 
-  <button
-    mat-icon-button
-    [matTooltip]="!isDark ? 'Dark' : 'Light'"
-    (click)="toggleScheme()"
-  >
+  <button mat-icon-button [matTooltip]="!isDark ? 'Dark' : 'Light'" (click)="toggleScheme()">
     <mat-icon>
       {{ !isDark ? "dark_mode" : "light_mode" }}
     </mat-icon>
   </button>
 
-  <a
-    mat-icon-button
-    matTooltip="Github"
-    href="https://github.com/mohsen77sk/angular-touch-keyboard"
-  >
+  <a mat-icon-button matTooltip="Github" href="https://github.com/mohsen77sk/angular-touch-keyboard">
     <mat-icon>
       <img src="./assets/icons/github-circle-transparent.svg" />
     </mat-icon>
@@ -35,16 +27,8 @@
     <mat-card-content>
       <p>Open with button</p>
       <div class="native-input">
-        <input
-          type="text"
-          ngxTouchKeyboard
-          #basicTouchKeyboard="ngxTouchKeyboard"
-        />
-        <button
-          mat-icon-button
-          type="button"
-          (click)="basicTouchKeyboard.togglePanel()"
-        >
+        <input type="text" ngxTouchKeyboard [(ngxTouchKeyboardOpen)]="basicSimpleIsOpen" />
+        <button mat-icon-button type="button" (click)="basicSimpleIsOpen = !basicSimpleIsOpen">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </div>
@@ -58,7 +42,6 @@
           ngxTouchKeyboard
           #basic2TouchKeyboard="ngxTouchKeyboard"
           (focus)="basic2TouchKeyboard.openPanel()"
-          (blur)="basic2TouchKeyboard.closePanel()"
         />
       </div>
 
@@ -72,7 +55,6 @@
           ngxTouchKeyboardFullScreen
           #basicFullscreenTouchKeyboard="ngxTouchKeyboard"
           (focus)="basicFullscreenTouchKeyboard.openPanel()"
-          (blur)="basicFullscreenTouchKeyboard.closePanel()"
         />
       </div>
 
@@ -84,7 +66,6 @@
           ngxTouchKeyboard
           #basicTextareaTouchKeyboard="ngxTouchKeyboard"
           (focus)="basicTextareaTouchKeyboard.openPanel()"
-          (blur)="basicTextareaTouchKeyboard.closePanel()"
         ></textarea>
       </div>
     </mat-card-content>
@@ -97,18 +78,8 @@
     <mat-card-content>
       <mat-form-field appearance="outline">
         <mat-label>Open with button</mat-label>
-        <input
-          matInput
-          type="text"
-          ngxTouchKeyboard
-          #materialTouchKeyboard="ngxTouchKeyboard"
-        />
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="materialTouchKeyboard.togglePanel()"
-        >
+        <input matInput type="text" ngxTouchKeyboard [(ngxTouchKeyboardOpen)]="materialSimpleIsOpen" />
+        <button mat-icon-button matSuffix type="button" (click)="materialSimpleIsOpen = !materialSimpleIsOpen">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -121,7 +92,6 @@
           ngxTouchKeyboard
           #material2TouchKeyboard="ngxTouchKeyboard"
           (focus)="material2TouchKeyboard.openPanel()"
-          (blur)="material2TouchKeyboard.closePanel()"
         />
       </mat-form-field>
 
@@ -134,7 +104,6 @@
           ngxTouchKeyboardFullScreen
           #materiaFullscreenTouchKeyboard="ngxTouchKeyboard"
           (focus)="materiaFullscreenTouchKeyboard.openPanel()"
-          (blur)="materiaFullscreenTouchKeyboard.closePanel()"
         />
       </mat-form-field>
 
@@ -145,7 +114,6 @@
           ngxTouchKeyboard
           #materialTextareaTouchKeyboard="ngxTouchKeyboard"
           (focus)="materialTextareaTouchKeyboard.openPanel()"
-          (blur)="materialTextareaTouchKeyboard.closePanel()"
         ></textarea>
       </mat-form-field>
     </mat-card-content>
@@ -164,9 +132,7 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>Layouts</mat-card-title>
-      <mat-card-subtitle>
-        Depends on attribute inputmode, the keyboard layout is changed.
-      </mat-card-subtitle>
+      <mat-card-subtitle> Depends on attribute inputmode, the keyboard layout is changed. </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p></p>
@@ -183,18 +149,8 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Default</mat-label>
-        <input
-          matInput
-          type="text"
-          [ngxTouchKeyboard]="language"
-          #defaultTouchKeyboard="ngxTouchKeyboard"
-        />
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="defaultTouchKeyboard.togglePanel()"
-        >
+        <input matInput type="text" [ngxTouchKeyboard]="language" #defaultTouchKeyboard="ngxTouchKeyboard" />
+        <button mat-icon-button matSuffix type="button" (click)="defaultTouchKeyboard.togglePanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -208,12 +164,7 @@
           [ngxTouchKeyboard]="language"
           #searchTouchKeyboard="ngxTouchKeyboard"
         />
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="searchTouchKeyboard.togglePanel()"
-        >
+        <button mat-icon-button matSuffix type="button" (click)="searchTouchKeyboard.togglePanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -227,12 +178,7 @@
           [ngxTouchKeyboard]="language"
           #emailTouchKeyboard="ngxTouchKeyboard"
         />
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="emailTouchKeyboard.togglePanel()"
-        >
+        <button mat-icon-button matSuffix type="button" (click)="emailTouchKeyboard.togglePanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -246,12 +192,7 @@
           [ngxTouchKeyboard]="language"
           #urlTouchKeyboard="ngxTouchKeyboard"
         />
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="urlTouchKeyboard.togglePanel()"
-        >
+        <button mat-icon-button matSuffix type="button" (click)="urlTouchKeyboard.togglePanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -265,12 +206,7 @@
           [ngxTouchKeyboard]="language"
           #numericTouchKeyboard="ngxTouchKeyboard"
         />
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="numericTouchKeyboard.togglePanel()"
-        >
+        <button mat-icon-button matSuffix type="button" (click)="numericTouchKeyboard.togglePanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -284,12 +220,7 @@
           [ngxTouchKeyboard]="language"
           #decimalTouchKeyboard="ngxTouchKeyboard"
         />
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="decimalTouchKeyboard.togglePanel()"
-        >
+        <button mat-icon-button matSuffix type="button" (click)="decimalTouchKeyboard.togglePanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -303,12 +234,7 @@
           [ngxTouchKeyboard]="language"
           #telTouchKeyboard="ngxTouchKeyboard"
         />
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="telTouchKeyboard.togglePanel()"
-        >
+        <button mat-icon-button matSuffix type="button" (click)="telTouchKeyboard.togglePanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>

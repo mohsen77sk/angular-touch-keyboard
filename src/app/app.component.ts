@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import packageJson from '../../projects/ngx-touch-keyboard/package.json';
@@ -12,6 +12,9 @@ import { MaterialDialogExampleComponent } from './material-dialog-example/materi
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
+  private _document = inject(DOCUMENT);
+  private _dialog = inject(MatDialog);
+
   isDark = true;
   version = packageJson.version;
 
@@ -25,13 +28,8 @@ export class AppComponent {
     { value: 'sv-SE', name: 'Swedish' },
   ];
 
-  /**
-   * constructor
-   */
-  constructor(
-    @Inject(DOCUMENT) private _document: any,
-    private _dialog: MatDialog
-  ) {}
+  basicSimpleIsOpen = false;
+  materialSimpleIsOpen = false;
 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks

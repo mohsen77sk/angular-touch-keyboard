@@ -10,12 +10,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { ComponentPortal } from '@angular/cdk/portal';
-import {
-  Overlay,
-  OverlayRef,
-  OverlaySizeConfig,
-  PositionStrategy,
-} from '@angular/cdk/overlay';
+import { Overlay, OverlayRef, OverlaySizeConfig, PositionStrategy } from '@angular/cdk/overlay';
 import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
 
 /**
@@ -116,17 +111,13 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     }
 
     // Update position the overlay
-    this._overlayRef.updatePositionStrategy(
-      this._getPositionStrategy(this.fullScreenMode())
-    );
+    this._overlayRef.updatePositionStrategy(this._getPositionStrategy(this.fullScreenMode()));
 
     // Update size the overlay
     this._overlayRef.updateSize(this._getOverlaySize(this.fullScreenMode()));
 
     // Attach the portal to the overlay
-    this._panelRef = this._overlayRef.attach(
-      new ComponentPortal(NgxTouchKeyboardComponent)
-    );
+    this._panelRef = this._overlayRef.attach(new ComponentPortal(NgxTouchKeyboardComponent));
     this._panelRef.instance.debug = this.debugMode();
     this._panelRef.instance.setLocale(this.locale());
     this._panelRef.instance.setActiveInput(this._elementRef.nativeElement);

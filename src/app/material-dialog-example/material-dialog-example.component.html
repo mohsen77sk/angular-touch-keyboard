@@ -8,37 +8,16 @@
 <mat-dialog-content>
   <mat-form-field appearance="outline">
     <mat-label>Basic sample</mat-label>
-    <input
-      matInput
-      type="text"
-      ngxTouchKeyboard
-      #defaultTouchKeyboard="ngxTouchKeyboard"
-    />
-    <button
-      mat-icon-button
-      matSuffix
-      type="button"
-      (click)="defaultTouchKeyboard.togglePanel()"
-    >
+    <input matInput type="text" ngxTouchKeyboard [(ngxTouchKeyboardOpen)]="isOpen1" />
+    <button mat-icon-button matSuffix type="button" (click)="isOpen1 = !isOpen1">
       <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
     </button>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Fullscreen sample</mat-label>
-    <input
-      matInput
-      type="text"
-      ngxTouchKeyboard
-      ngxTouchKeyboardFullScreen
-      #fullscreenTouchKeyboard="ngxTouchKeyboard"
-    />
-    <button
-      mat-icon-button
-      matSuffix
-      type="button"
-      (click)="fullscreenTouchKeyboard.togglePanel()"
-    >
+    <input matInput type="text" ngxTouchKeyboard ngxTouchKeyboardFullScreen [(ngxTouchKeyboardOpen)]="isOpen2" />
+    <button mat-icon-button matSuffix type="button" (click)="isOpen2 = !isOpen2">
       <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
     </button>
   </mat-form-field>

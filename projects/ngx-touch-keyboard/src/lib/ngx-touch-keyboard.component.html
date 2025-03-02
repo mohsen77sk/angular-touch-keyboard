@@ -1,21 +1,18 @@
-<div
-  class="touch-keyboard"
-  [ngClass]="'layout-' + layoutMode + '-' + layoutName"
->
+<div class="touch-keyboard" [ngClass]="'layout-' + layoutMode + '-' + layoutName">
   @for (row of locale.layouts[layoutMode + '_' + layoutName]; track row[0]; let rowIndex = $index) {
   <div class="touch-keyboard-row">
     @for (key of row; track key) {
-      <button
-        [name]="key"
-        [dir]="locale.dir"
-        class="touch-keyboard-key"
-        [ngClass]="[getButtonClass(key)]"
-        [attr.data-layout]="layoutMode"
-        (pointerup)="handleButtonUp(key, $event)"
-        (pointerdown)="handleButtonDown(key, $event)"
-        (pointercancel)="handleButtonUp(key, $event)"
-        [innerHtml]="getButtonDisplayName(key)"
-      ></button>
+    <button
+      [name]="key"
+      [dir]="locale.dir"
+      class="touch-keyboard-key"
+      [ngClass]="[getButtonClass(key)]"
+      [attr.data-layout]="layoutMode"
+      (pointerup)="handleButtonUp(key, $event)"
+      (pointerdown)="handleButtonDown(key, $event)"
+      (pointercancel)="handleButtonUp(key, $event)"
+      [innerHtml]="getButtonDisplayName(key)"
+    ></button>
     }
   </div>
   }
