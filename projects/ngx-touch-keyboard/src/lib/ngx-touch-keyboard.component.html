@@ -2,7 +2,7 @@
   class="touch-keyboard"
   [ngClass]="'layout-' + layoutMode + '-' + layoutName"
 >
-  @for (row of locale.layouts[layoutMode + '_' + layoutName]; track row; let rowIndex = $index) {
+  @for (row of locale.layouts[layoutMode + '_' + layoutName]; track row[0]; let rowIndex = $index) {
   <div class="touch-keyboard-row">
     @for (key of row; track key) {
       <button
