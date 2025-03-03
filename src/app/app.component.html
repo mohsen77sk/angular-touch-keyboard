@@ -149,8 +149,14 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Default</mat-label>
-        <input matInput type="text" [ngxTouchKeyboard]="language" #defaultTouchKeyboard="ngxTouchKeyboard" />
-        <button mat-icon-button matSuffix type="button" (click)="defaultTouchKeyboard.togglePanel()">
+        <input
+          matInput
+          type="text"
+          ngxTouchKeyboard
+          [ngxTouchKeyboardLocale]="language"
+          #defaultTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button mat-icon-button matSuffix type="button" (click)="defaultTouchKeyboard.openPanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -161,10 +167,11 @@
           matInput
           type="text"
           inputmode="search"
-          [ngxTouchKeyboard]="language"
+          ngxTouchKeyboard
+          [ngxTouchKeyboardLocale]="language"
           #searchTouchKeyboard="ngxTouchKeyboard"
         />
-        <button mat-icon-button matSuffix type="button" (click)="searchTouchKeyboard.togglePanel()">
+        <button mat-icon-button matSuffix type="button" (click)="searchTouchKeyboard.openPanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -175,10 +182,11 @@
           matInput
           type="text"
           inputmode="email"
-          [ngxTouchKeyboard]="language"
+          ngxTouchKeyboard
+          [ngxTouchKeyboardLocale]="language"
           #emailTouchKeyboard="ngxTouchKeyboard"
         />
-        <button mat-icon-button matSuffix type="button" (click)="emailTouchKeyboard.togglePanel()">
+        <button mat-icon-button matSuffix type="button" (click)="emailTouchKeyboard.openPanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -189,10 +197,11 @@
           matInput
           type="text"
           inputmode="url"
-          [ngxTouchKeyboard]="language"
+          ngxTouchKeyboard
+          [ngxTouchKeyboardLocale]="language"
           #urlTouchKeyboard="ngxTouchKeyboard"
         />
-        <button mat-icon-button matSuffix type="button" (click)="urlTouchKeyboard.togglePanel()">
+        <button mat-icon-button matSuffix type="button" (click)="urlTouchKeyboard.openPanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -203,10 +212,11 @@
           matInput
           type="text"
           inputmode="numeric"
-          [ngxTouchKeyboard]="language"
+          ngxTouchKeyboard
+          [ngxTouchKeyboardLocale]="language"
           #numericTouchKeyboard="ngxTouchKeyboard"
         />
-        <button mat-icon-button matSuffix type="button" (click)="numericTouchKeyboard.togglePanel()">
+        <button mat-icon-button matSuffix type="button" (click)="numericTouchKeyboard.openPanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -217,10 +227,11 @@
           matInput
           type="text"
           inputmode="decimal"
-          [ngxTouchKeyboard]="language"
+          ngxTouchKeyboard
+          [ngxTouchKeyboardLocale]="language"
           #decimalTouchKeyboard="ngxTouchKeyboard"
         />
-        <button mat-icon-button matSuffix type="button" (click)="decimalTouchKeyboard.togglePanel()">
+        <button mat-icon-button matSuffix type="button" (click)="decimalTouchKeyboard.openPanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
@@ -231,10 +242,11 @@
           matInput
           type="text"
           inputmode="tel"
-          [ngxTouchKeyboard]="language"
+          ngxTouchKeyboard
+          [ngxTouchKeyboardLocale]="language"
           #telTouchKeyboard="ngxTouchKeyboard"
         />
-        <button mat-icon-button matSuffix type="button" (click)="telTouchKeyboard.togglePanel()">
+        <button mat-icon-button matSuffix type="button" (click)="telTouchKeyboard.openPanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>

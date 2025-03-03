@@ -4,15 +4,14 @@ import {
   ElementRef,
   HostListener,
   inject,
-  LOCALE_ID,
   output,
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
+import { NGX_TOUCH_KEYBOARD_LOCALE } from './ngx-touch-keyboard.constants';
 import { fnButton } from './Locale/constants';
 import { Locale } from './Locale/type';
-import * as Locales from './Locale';
 
 @Component({
   selector: 'ngx-touch-keyboard',
@@ -24,9 +23,9 @@ import * as Locales from './Locale';
 export class NgxTouchKeyboardComponent {
   private _sanitizer = inject(DomSanitizer);
   private _elementRef = inject(ElementRef<HTMLInputElement>);
-  private _defaultLocale = inject(LOCALE_ID);
+  private _defaultLocale = inject(NGX_TOUCH_KEYBOARD_LOCALE);
 
-  locale: Locale = Locales.enUS;
+  locale: Locale = this._defaultLocale;
   layoutMode = 'text';
   layoutName = 'alphabetic';
   debug = false;
@@ -113,21 +112,16 @@ export class NgxTouchKeyboardComponent {
   // -----------------------------------------------------------------------------------------------------
 
   /**
-   * Set layout keyboard for locale
+   * Set locale
    *
-   * @param value
+   * @param value Locale
    */
-  setLocale(value: string = this._defaultLocale): void {
-    // normalize value
-    value = value.replace('-', '').trim();
-    // Set Locale if supported
-    if ((Object.keys(Locales) as readonly string[]).includes(value)) {
-      this.locale = Locales[value as 'enUS'];
+  setLocale(value: Locale = this._defaultLocale): void {
+    if (!(value && value.layouts)) {
+      throw new Error('Locale is not defined');
     }
-    // Set default Locale if not supported
-    else {
-      this.locale = Locales.enUS;
-    }
+
+    this.locale = value;
   }
 
   /**
@@ -155,7 +149,7 @@ export class NgxTouchKeyboardComponent {
     }
 
     if (this.debug) {
-      console.log('Locale:', `${this.locale.code || this._defaultLocale}`);
+      console.log('Locale:', `${this.locale.code}`);
       console.log('Layout:', `${this.layoutMode}_${this.layoutName}`);
     }
 

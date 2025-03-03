@@ -22,17 +22,22 @@ npm install @angular/cdk ngx-touch-keyboard
 
 ### Step 2: Import the module
 
-Add `ngxTouchKeyboardModule` as an import in your app's root NgModule.
+Add `NgxTouchKeyboardModule` as an import and provide a custom locale in `NGX_TOUCH_KEYBOARD_LOCALE` in your app's root NgModule.
 
 ```typescript
-import { ngxTouchKeyboardModule }  from 'ngx-touch-keyboard';
+import { NgxTouchKeyboardModule, NGX_TOUCH_KEYBOARD_LOCALE, faIR } from 'ngx-touch-keyboard';
+
 @NgModule({
-  ...
+  // ...existing code...
   imports: [
-    ...
-    ngxTouchKeyboardModule,
+    // ...existing code...
+    NgxTouchKeyboardModule,
   ],
-  ...
+  providers: [
+    // ...existing code...
+    { provide: NGX_TOUCH_KEYBOARD_LOCALE, useValue: faIR }
+  ],
+  // ...existing code...
 })
 export class AppModule { }
 ```
@@ -76,10 +81,23 @@ Simple usage example
 
 Locale usage example
 
+```ts
+import { faIR } from 'ngx-touch-keyboard';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+})
+export class AppComponent {
+  customLocale = faIR;
+}
+```
+
 ```html
 <input
   type="text"
-  ngxTouchKeyboard="fa-IR"
+  ngxTouchKeyboard
+  [ngxTouchKeyboardLocale]="customLocale"
   #touchKeyboard="ngxTouchKeyboard"
   (focus)="touchKeyboard.openPanel()"
 />
@@ -100,7 +118,7 @@ Material usage example
     mat-icon-button
     matSuffix
     type="button"
-    (click)="touchKeyboard.togglePanel()"
+    (click)="touchKeyboard.openPanel()"
   >
     <mat-icon> keyboard </mat-icon>
   </button>
@@ -114,6 +132,7 @@ Material usage example
 | `ngxTouchKeyboard`                | Required to initialize Virtual Keyboard to specified input. |
 | `ngxTouchKeyboardOpen`            | Whether the overlay is open.                                |
 | `ngxTouchKeyboardDebug`           | Debug mode is on.                                           |
+| `ngxTouchKeyboardLocale`          | Custom locale.                                              |
 | `ngxTouchKeyboardFullScreen`      | Overlay mode to fullscreen.                                 |
 | `ngxConnectedTouchKeyboardOrigin` | Origin for the connected overlay.                           |
 

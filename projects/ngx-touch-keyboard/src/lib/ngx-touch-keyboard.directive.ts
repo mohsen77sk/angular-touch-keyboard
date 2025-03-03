@@ -12,6 +12,7 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Overlay, OverlayRef, OverlaySizeConfig, PositionStrategy } from '@angular/cdk/overlay';
 import { NgxTouchKeyboardComponent } from './ngx-touch-keyboard.component';
+import { Locale } from './Locale/type';
 
 /**
  * Directive applied to an element to make it usable as an origin for an keyboard using a
@@ -37,12 +38,12 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
   private _overlay = inject(Overlay);
   private _elementRef = inject(ElementRef<HTMLInputElement>);
 
-  locale = input.required<string>({
-    alias: 'ngxTouchKeyboard',
-  });
-
   open = model(false, {
     alias: 'ngxTouchKeyboardOpen',
+  });
+
+  locale = input<Locale | undefined>(undefined, {
+    alias: 'ngxTouchKeyboardLocale',
   });
 
   debugMode = input(false, {

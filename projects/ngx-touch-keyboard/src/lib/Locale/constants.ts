@@ -1,3 +1,7 @@
+/**
+ * A collection of constants representing special function buttons for a touch keyboard.
+ * Each constant is a string that corresponds to a specific keyboard action.
+ */
 export const fnButton = {
   DONE: `{done}`,
   ENTER: `{enter}`,
@@ -8,6 +12,9 @@ export const fnButton = {
   TAB: `{tab}`,
 };
 
+/**
+ * An object containing SVG icons for various keyboard functions.
+ */
 export const fnDisplay = {
   DONE: `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24"><path d="m12 15-5-5h10Z"/></svg>`,
   ENTER: `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 24 24"><path d="m9 18-6-6 6-6 1.4 1.4L6.8 11H19V7h2v6H6.8l3.6 3.6Z"/></svg>`,
