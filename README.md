@@ -1,58 +1,119 @@
 # AngularTouchKeyboard
 
+An Angular touch keyboard component that provides a customizable on-screen keyboard for input elements.
+
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![npm version](https://badge.fury.io/js/ngx-touch-keyboard.svg)](http://badge.fury.io/js/ngx-touch-keyboard) [![Build Status](https://github.com/mohsen77sk/angular-touch-keyboard/workflows/main/badge.svg)](https://github.com/mohsen77sk/angular-touch-keyboard/actions)
 
-## What is this?
-
-Virtual Keyboard for Angular applications.
-
 ![angular touch keyboard](https://mohsen77sk.github.io/angular-touch-keyboard/assets/images/angularTouchKeyboard.png)
+
+## Features
+
+- 📱 Responsive virtual keyboard
+- 🌐 Multiple locale support
+- 🎯 Flexible positioning
+- 🖥️ Full-screen mode support
+- 🎨 Customizable appearance
+- 🔧 Material Design integration
 
 ## Demo
 
 [https://mohsen77sk.github.io/angular-touch-keyboard/](https://mohsen77sk.github.io/angular-touch-keyboard/)
 
-## Install
+## Installation
 
-### Step 1: Install [ngx-touch-keyboard](https://www.npmjs.com/package/ngx-touch-keyboard)
-
-```sh
+```bash
 npm install @angular/cdk ngx-touch-keyboard
 ```
 
-### Step 2: Import the module
+## Basic Usage
 
-Add `NgxTouchKeyboardModule` as an import and provide a custom locale in `NGX_TOUCH_KEYBOARD_LOCALE` in your app's root NgModule.
+Import the `NgxTouchKeyboardModule` in your app.module.ts:
 
 ```typescript
-import { NgxTouchKeyboardModule, NGX_TOUCH_KEYBOARD_LOCALE, faIR } from 'ngx-touch-keyboard';
+import { NgxTouchKeyboardModule } from 'ngx-touch-keyboard';
 
 @NgModule({
-  // ...existing code...
   imports: [
-    // ...existing code...
-    NgxTouchKeyboardModule,
+    NgxTouchKeyboardModule
   ],
-  providers: [
-    // ...existing code...
-    { provide: NGX_TOUCH_KEYBOARD_LOCALE, useValue: faIR }
-  ],
-  // ...existing code...
 })
 export class AppModule { }
 ```
 
-### Compatibility
+If you want to set the custom locale, provide `NGX_TOUCH_KEYBOARD_LOCALE` by custom locale
 
-#### Version [`3.0.0`]
+- default locale is `enUS`
 
-* `@angular/core`: `^16.0.0` || `^17.0.0` || `^18.0.0`
-* `@angular/cdk`: `^16.0.0` || `^17.0.0` || `^18.0.0`
+```typescript
+import { NGX_TOUCH_KEYBOARD_LOCALE, faIR } from 'ngx-touch-keyboard';
 
-#### Version [`2.0.0`]
+@NgModule({
+  providers: [
+    { provide: NGX_TOUCH_KEYBOARD_LOCALE, useValue: faIR }
+  ],
+})
+export class AppModule { }
+```
 
-* `@angular/core`: `^14.0.0` || `^15.0.0`
-* `@angular/cdk`: `^14.0.0` || `^15.0.0`
+Add the directive to your input elements:
+
+```html
+<input ngxTouchKeyboard [(ngxTouchKeyboardOpen)]="isOpen">
+```
+
+## API Reference
+
+### Directives
+
+#### NgxTouchKeyboard
+
+```typescript
+@Directive({
+  selector: 'input[ngxTouchKeyboard], textarea[ngxTouchKeyboard]'
+})
+```
+
+### Inputs
+
+| Name                              | Type                     | Default | Description                                    |
+| --------------------------------- | ------------------------ | ------- | ---------------------------------------------- |
+| `ngxTouchKeyboardOpen`            | `boolean`                | `false` | Controls the visibility of the keyboard        |
+| `ngxTouchKeyboardLocale`          | `Locale`                 | `enUS`  | Sets the keyboard locale                       |
+| `ngxTouchKeyboardFullScreen`      | `boolean`                | `false` | Enables full-screen mode                       |
+| `ngxTouchKeyboardDebug`           | `boolean`                | `false` | Enables debug mode                             |
+| `ngxConnectedTouchKeyboardOrigin` | `NgxTouchKeyboardOrigin` | `null`  | Sets a custom origin for the keyboard position |
+
+### Methods
+
+- `openPanel()`: Opens the keyboard panel
+- `closePanel()`: Closes the keyboard panel
+- `togglePanel()`: Toggles the keyboard panel visibility
+
+## Material Design Integration
+
+The component automatically detects and integrates with Angular Material form fields, providing proper positioning and styling.
+
+## Advanced Usage
+
+### Custom locale
+
+```html
+<input ngxTouchKeyboard [ngxTouchKeyboardLocale]="faIR">
+```
+
+### Full-Screen Mode
+
+```html
+<input ngxTouchKeyboard [ngxTouchKeyboardFullScreen]="true">
+```
+
+### Custom Position Origin
+
+```html
+<div ngxTouchKeyboardOrigin #origin="ngxTouchKeyboardOrigin">
+  <input ngxTouchKeyboard [ngxConnectedTouchKeyboardOrigin]="origin">
+</div>
+```
 
 ## Localization
 
@@ -65,86 +126,6 @@ AngularTouchKeyboard is localized in 7 keyboard-specific locales:
 * `ka-GE` Georgian (Georgia)
 * `ru-RU` Russian (Russia)
 * `sv-SE` Swedish (Sweden)
-
-## Usage
-
-Simple usage example
-
-```html
-<input
-  type="text"
-  ngxTouchKeyboard
-  #touchKeyboard="ngxTouchKeyboard"
-  (focus)="touchKeyboard.openPanel()"
-/>
-```
-
-Locale usage example
-
-```ts
-import { faIR } from 'ngx-touch-keyboard';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-})
-export class AppComponent {
-  customLocale = faIR;
-}
-```
-
-```html
-<input
-  type="text"
-  ngxTouchKeyboard
-  [ngxTouchKeyboardLocale]="customLocale"
-  #touchKeyboard="ngxTouchKeyboard"
-  (focus)="touchKeyboard.openPanel()"
-/>
-```
-
-Material usage example
-
-```html
-<mat-form-field>
-  <mat-label>Default</mat-label>
-  <input
-    matInput
-    type="text"
-    ngxTouchKeyboard
-    #touchKeyboard="ngxTouchKeyboard"
-  />
-  <button
-    mat-icon-button
-    matSuffix
-    type="button"
-    (click)="touchKeyboard.openPanel()"
-  >
-    <mat-icon> keyboard </mat-icon>
-  </button>
-</mat-form-field>
-```
-
-### Properties
-
-| Property                          | Description                                                 |
-| --------------------------------- | ----------------------------------------------------------- |
-| `ngxTouchKeyboard`                | Required to initialize Virtual Keyboard to specified input. |
-| `ngxTouchKeyboardOpen`            | Whether the overlay is open.                                |
-| `ngxTouchKeyboardDebug`           | Debug mode is on.                                           |
-| `ngxTouchKeyboardLocale`          | Custom locale.                                              |
-| `ngxTouchKeyboardFullScreen`      | Overlay mode to fullscreen.                                 |
-| `ngxConnectedTouchKeyboardOrigin` | Origin for the connected overlay.                           |
-
-### Methods
-
-Here's the list of all available methods:
-
-| Methods               | Description           |
-| --------------------- | --------------------- |
-| `openPanel(): void`   | Open keyboard panel   |
-| `closePanel(): void`  | Close keyboard panel  |
-| `togglePanel(): void` | Toggle keyboard panel |
 
 ## Themes
 
@@ -187,6 +168,10 @@ The most useful commands for development are:
 
 * `npm run start` to start a development server
 * `npm run build-demo` to build the demo locally (it will be published automatically by GitHub Actions)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
