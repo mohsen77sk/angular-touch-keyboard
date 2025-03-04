@@ -25,6 +25,16 @@ An Angular touch keyboard component that provides a customizable on-screen keybo
 npm install @angular/cdk ngx-touch-keyboard
 ```
 
+## Compatibility
+
+The version of this library is synchronized with the major version of Angular to ensure compatibility.
+
+| Angular Version | Package Version |
+| --------------- | --------------- |
+| >= 18.0.0       | 4.x             |
+| >= 16.0.0       | 3.x             |
+| >= 14.0.0       | 2.x             |
+
 ## Basic Usage
 
 Import the `NgxTouchKeyboardModule` in your app.module.ts:
