@@ -1,7 +1,8 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import packageJson from '../../projects/ngx-touch-keyboard/package.json';
+import { enGB, enUS, faIR, heIL, kaGE, ruRU, svSE } from 'ngx-touch-keyboard';
 
 import { MaterialDialogExampleComponent } from './material-dialog-example/material-dialog-example.component';
 
@@ -12,27 +13,25 @@ import { MaterialDialogExampleComponent } from './material-dialog-example/materi
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
+  private _document = inject(DOCUMENT);
+  private _dialog = inject(MatDialog);
+
   isDark = true;
   version = packageJson.version;
 
-  language = 'en-US';
+  language = enUS;
   languages = [
-    { value: 'en-US', name: 'English (US)' },
-    { value: 'en-GB', name: 'English (UK)' },
-    { value: 'fa-IR', name: 'Persian' },
-    { value: 'he-IL', name: 'Hebrew' },
-    { value: 'ka-GE', name: 'Georgian' },
-    { value: 'ru-RU', name: 'Russian' },
-    { value: 'sv-SE', name: 'Swedish' },
+    { value: enUS, name: 'English (US)' },
+    { value: enGB, name: 'English (UK)' },
+    { value: faIR, name: 'Persian' },
+    { value: heIL, name: 'Hebrew' },
+    { value: kaGE, name: 'Georgian' },
+    { value: ruRU, name: 'Russian' },
+    { value: svSE, name: 'Swedish' },
   ];
 
-  /**
-   * constructor
-   */
-  constructor(
-    @Inject(DOCUMENT) private _document: any,
-    private _dialog: MatDialog
-  ) {}
+  basicSimpleIsOpen = false;
+  materialSimpleIsOpen = false;
 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks

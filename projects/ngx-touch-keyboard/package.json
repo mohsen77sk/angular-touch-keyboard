@@ -1,24 +1,9 @@
 {
   "name": "ngx-touch-keyboard",
-  "version": "3.3.0",
   "description": "Virtual Keyboard for Angular applications",
-  "peerDependencies": {
-    "@angular/common": ">=16.0.0",
-    "@angular/core": ">=16.0.0",
-    "@angular/cdk": ">=16.0.0"
-  },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
+  "version": "4.0.0",
+  "license": "MIT",
   "private": false,
-  "keywords": [
-    "Angular",
-    "Material",
-    "Touch",
-    "Virtual",
-    "Keyboard",
-    "onscreen"
-  ],
   "author": {
     "name": "Mohsen Sohrabi",
     "url": "https://github.com/mohsen77sk"
@@ -31,5 +16,27 @@
   "bugs": {
     "url": "https://github.com/mohsen77sk/angular-touch-keyboard/issues"
   },
-  "license": "MIT"
+  "keywords": [
+    "Angular",
+    "Material",
+    "Touch",
+    "Virtual",
+    "Keyboard",
+    "onscreen"
+  ],
+  "peerDependencies": {
+    "@angular/common": ">=18.0.0",
+    "@angular/core": ">=18.0.0",
+    "@angular/cdk": ">=18.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "typesVersions": {
+    "*": {
+      "locale": [
+        "./lib/Locale/index.d.ts"
+      ]
+    }
+  }
 }

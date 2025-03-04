@@ -10,44 +10,46 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-        
+
     steps:
     - name: Syncing repository
-      uses: actions/checkout@v3
-    
+      uses: actions/checkout@v4
+
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
+        node-version: 20.14.0
         cache: 'npm'
-    
+
     - name: Install Dependencies
       run: npm ci
-    
+
     - name: Build Application
       run: npm run build-demo
-    
+
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dist
         path: dist/
-  
+
   test:
     name: Test
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Syncing repository
-      uses: actions/checkout@v3
-    
+      uses: actions/checkout@v4
+
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
+        node-version: 20.14.0
         cache: 'npm'
-        
+
     - name: Install Dependencies
       run: npm ci
-        
+
     - name: Test Lib
       run: npm run test-lib
     - name: Test Demo
@@ -63,13 +65,13 @@ jobs:
 
     steps:
     - name: Download artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: dist
         path: dist/
 
     - name: Deploy demo
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: dist/angular-touch-keyboard

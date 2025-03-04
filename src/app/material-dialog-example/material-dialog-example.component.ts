@@ -6,4 +6,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./material-dialog-example.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MaterialDialogExampleComponent {}
+export class MaterialDialogExampleComponent {
+  isOpen1 = false;
+  isOpen2 = false;
+}
