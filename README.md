@@ -127,10 +127,11 @@ The component automatically detects and integrates with Angular Material form fi
 
 ## Localization
 
-AngularTouchKeyboard is localized in 7 keyboard-specific locales:
+AngularTouchKeyboard is localized in 8 keyboard-specific locales:
 
 * `en-US` English (United States) (default)
 * `en-UK` English (United Kingdom)
+* `es-ES` Spanish (Spain)
 * `fa-IR` Persian (Iran)
 * `he-IL` Hebrew (Israel)
 * `ka-GE` Georgian (Georgia)
