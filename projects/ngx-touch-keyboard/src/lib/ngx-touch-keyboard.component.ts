@@ -452,10 +452,10 @@ export class NgxTouchKeyboardComponent {
         emojiMatched = prevTwoChars.match(emojiMatchedReg);
 
         if (emojiMatched) {
-          output = source.substr(0, position - 2) + source.substr(position);
+          output = source.substring(0, position - 2) + source.substring(position);
           if (moveCaret) this._updateCaretPos(2, true);
         } else {
-          output = source.substr(0, position - 1) + source.substr(position);
+          output = source.substring(0, position - 1) + source.substring(position);
           if (moveCaret) this._updateCaretPos(1, true);
         }
       } else {
