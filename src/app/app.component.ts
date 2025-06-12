@@ -2,7 +2,7 @@ import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import packageJson from '../../projects/ngx-touch-keyboard/package.json';
-import { enGB, enUS, faIR, heIL, kaGE, ruRU, svSE } from 'ngx-touch-keyboard';
+import { enGB, enUS, esEs, faIR, heIL, kaGE, ruRU, svSE } from 'ngx-touch-keyboard';
 
 import { MaterialDialogExampleComponent } from './material-dialog-example/material-dialog-example.component';
 
@@ -23,6 +23,7 @@ export class AppComponent {
   languages = [
     { value: enUS, name: 'English (US)' },
     { value: enGB, name: 'English (UK)' },
+    { value: esEs, name: 'Spanish' },
     { value: faIR, name: 'Persian' },
     { value: heIL, name: 'Hebrew' },
     { value: kaGE, name: 'Georgian' },
