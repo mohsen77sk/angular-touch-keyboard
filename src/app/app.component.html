@@ -220,6 +220,21 @@
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Numeric with minus key</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="numeric"
+          ngxTouchKeyboard
+          [ngxTouchKeyboardLocale]="language"
+          ngxTouchKeyboardShowMinusKey="true"
+          #numericMinusTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button mat-icon-button matSuffix type="button" (click)="numericMinusTouchKeyboard.openPanel()">
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Decimal</mat-label>
@@ -232,6 +247,22 @@
           #decimalTouchKeyboard="ngxTouchKeyboard"
         />
         <button mat-icon-button matSuffix type="button" (click)="decimalTouchKeyboard.openPanel()">
+          <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Decimal with minus key</mat-label>
+        <input
+          matInput
+          type="text"
+          inputmode="decimal"
+          ngxTouchKeyboard
+          [ngxTouchKeyboardLocale]="language"
+          ngxTouchKeyboardShowMinusKey="true"
+          #decimalMinusTouchKeyboard="ngxTouchKeyboard"
+        />
+        <button mat-icon-button matSuffix type="button" (click)="decimalMinusTouchKeyboard.openPanel()">
           <mat-icon class="mat-icon-rtl-mirror"> keyboard </mat-icon>
         </button>
       </mat-form-field>

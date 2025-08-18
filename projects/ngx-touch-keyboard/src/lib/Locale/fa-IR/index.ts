@@ -80,11 +80,23 @@ const layouts: Layout = {
     ['۷', '۸', '۹'],
     ['۰', '{backspace}'],
   ],
+  numeric_withMinusKey: [
+    ['۱', '۲', '۳'],
+    ['۴', '۵', '۶'],
+    ['۷', '۸', '۹'],
+    ['-', '۰', '{backspace}'],
+  ],
   decimal_default: [
     ['۱', '۲', '۳'],
     ['۴', '۵', '۶'],
     ['۷', '۸', '۹'],
     ['٫', '۰', '{backspace}'],
+  ],
+  decimal_withMinusKey: [
+    ['۱', '۲', '۳', '-'],
+    ['۴', '۵', '۶', '٫'],
+    ['۷', '۸', '۹','{backspace}'],
+    ['۰'],
   ],
   tel_default: [
     ['۱', '۲', '۳', '*'],

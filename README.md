@@ -85,13 +85,14 @@ Add the directive to your input elements:
 
 ### Inputs
 
-| Name                              | Type                     | Default | Description                                    |
-| --------------------------------- | ------------------------ | ------- | ---------------------------------------------- |
-| `ngxTouchKeyboardOpen`            | `boolean`                | `false` | Controls the visibility of the keyboard        |
-| `ngxTouchKeyboardLocale`          | `Locale`                 | `enUS`  | Sets the keyboard locale                       |
-| `ngxTouchKeyboardFullScreen`      | `boolean`                | `false` | Enables full-screen mode                       |
-| `ngxTouchKeyboardDebug`           | `boolean`                | `false` | Enables debug mode                             |
-| `ngxConnectedTouchKeyboardOrigin` | `NgxTouchKeyboardOrigin` | `null`  | Sets a custom origin for the keyboard position |
+| Name                              | Type                     | Default | Description                                                            |
+| --------------------------------- | ------------------------ | ------- | ---------------------------------------------------------------------- |
+| `ngxTouchKeyboardOpen`            | `boolean`                | `false` | Controls the visibility of the keyboard                                |
+| `ngxTouchKeyboardLocale`          | `Locale`                 | `enUS`  | Sets the keyboard locale                                               |
+| `ngxTouchKeyboardFullScreen`      | `boolean`                | `false` | Enables full-screen mode                                               |
+| `ngxTouchKeyboardDebug`           | `boolean`                | `false` | Enables debug mode                                                     |
+| `ngxConnectedTouchKeyboardOrigin` | `NgxTouchKeyboardOrigin` | `null`  | Sets a custom origin for the keyboard position                         |
+| `ngxTouchKeyboardShowMinusKey`    | `boolean`                | `false` | Shows minus key (<kbd>-</kbd>). Only on numeric and decimal inputmodes |
 
 ### Methods
 

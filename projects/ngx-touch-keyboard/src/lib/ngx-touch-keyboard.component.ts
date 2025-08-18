@@ -29,6 +29,8 @@ export class NgxTouchKeyboardComponent {
   layoutMode = 'text';
   layoutName = 'alphabetic';
   debug = false;
+  /** Only gets applied on "numeric" and "decimal" inputmode. */
+  showMinusKey = false;
 
   closePanel = output<void>();
 
@@ -142,7 +144,13 @@ export class NgxTouchKeyboardComponent {
       this.layoutMode = 'text';
     }
 
-    if (inputMode && ['numeric', 'decimal', 'tel'].some((i) => i === inputMode)) {
+    if (inputMode && ['numeric', 'decimal'].some((i) => i === inputMode)) {
+      if (this.showMinusKey) {
+        this.layoutName = 'withMinusKey';
+      } else {
+        this.layoutName = 'default';
+      }
+    } else if (inputMode && 'tel' === inputMode) {
       this.layoutName = 'default';
     } else {
       this.layoutName = 'alphabetic';

@@ -56,6 +56,12 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     transform: booleanAttribute,
   });
 
+  /** Only gets applied on "numeric" and "decimal" inputmode. */
+  showMinusKey = input(false, {
+    alias: 'ngxTouchKeyboardShowMinusKey',
+    transform: booleanAttribute,
+  });
+
   origin = input<NgxTouchKeyboardOrigin | null>(null, {
     alias: 'ngxConnectedTouchKeyboardOrigin',
   });
@@ -119,6 +125,7 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
 
     // Attach the portal to the overlay
     this._panelRef = this._overlayRef.attach(new ComponentPortal(NgxTouchKeyboardComponent));
+    this._panelRef.instance.showMinusKey = this.showMinusKey();
     this._panelRef.instance.debug = this.debugMode();
     this._panelRef.instance.setLocale(this.locale());
     this._panelRef.instance.setActiveInput(this._elementRef.nativeElement);
