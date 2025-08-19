@@ -4,6 +4,7 @@
     @for (key of row; track key) {
     <button
       [name]="key"
+      type="button"
       [dir]="locale.dir"
       class="touch-keyboard-key"
       [ngClass]="[getButtonClass(key)]"
