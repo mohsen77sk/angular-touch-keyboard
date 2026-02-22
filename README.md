@@ -71,6 +71,10 @@ Add the directive to your input elements:
 <input ngxTouchKeyboard [(ngxTouchKeyboardOpen)]="isOpen">
 ```
 
+```html
+<input ngxTouchKeyboard ngxTouchKeyboardOpenOnFocus>
+```
+
 ## API Reference
 
 ### Directives
@@ -88,6 +92,7 @@ Add the directive to your input elements:
 | Name                              | Type                     | Default | Description                                    |
 | --------------------------------- | ------------------------ | ------- | ---------------------------------------------- |
 | `ngxTouchKeyboardOpen`            | `boolean`                | `false` | Controls the visibility of the keyboard        |
+| `ngxTouchKeyboardOpenOnFocus`     | `boolean`                | `false` | Open the visibility of the keyboard On focus   |
 | `ngxTouchKeyboardLocale`          | `Locale`                 | `enUS`  | Sets the keyboard locale                       |
 | `ngxTouchKeyboardFullScreen`      | `boolean`                | `false` | Enables full-screen mode                       |
 | `ngxTouchKeyboardDebug`           | `boolean`                | `false` | Enables debug mode                             |

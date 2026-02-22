@@ -4,6 +4,7 @@ import {
   Directive,
   effect,
   ElementRef,
+  HostListener,
   inject,
   input,
   model,
@@ -42,6 +43,11 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     alias: 'ngxTouchKeyboardOpen',
   });
 
+  openOnFocus = input(false, {
+    alias: 'ngxTouchKeyboardOpenOnFocus',
+    transform: booleanAttribute,
+  });
+
   locale = input<Locale | undefined>(undefined, {
     alias: 'ngxTouchKeyboardLocale',
   });
@@ -62,6 +68,13 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
 
   private _overlayRef!: OverlayRef;
   private _panelRef!: ComponentRef<NgxTouchKeyboardComponent>;
+
+  @HostListener('focus')
+  onFocus(): void {
+    if (this.openOnFocus()) {
+      this.open.set(true);
+    }
+  }
 
   /**
    * constructor

@@ -37,36 +37,21 @@
 
       <span>Open with focus</span>
       <div class="native-input">
-        <input
-          type="text"
-          ngxTouchKeyboard
-          #basic2TouchKeyboard="ngxTouchKeyboard"
-          (focus)="basic2TouchKeyboard.openPanel()"
-        />
+        <input type="text" ngxTouchKeyboard ngxTouchKeyboardOpenOnFocus />
       </div>
 
       <div style="margin-bottom: 2rem"></div>
 
       <span>Open with focus (Fullscreen mode)</span>
       <div class="native-input">
-        <input
-          type="text"
-          ngxTouchKeyboard
-          ngxTouchKeyboardFullScreen
-          #basicFullscreenTouchKeyboard="ngxTouchKeyboard"
-          (focus)="basicFullscreenTouchKeyboard.openPanel()"
-        />
+        <input type="text" ngxTouchKeyboard ngxTouchKeyboardOpenOnFocus ngxTouchKeyboardFullScreen />
       </div>
 
       <div style="margin-bottom: 2rem"></div>
 
       <span>Open with focus (textarea)</span>
       <div class="native-input">
-        <textarea
-          ngxTouchKeyboard
-          #basicTextareaTouchKeyboard="ngxTouchKeyboard"
-          (focus)="basicTextareaTouchKeyboard.openPanel()"
-        ></textarea>
+        <textarea ngxTouchKeyboard ngxTouchKeyboardOpenOnFocus></textarea>
       </div>
     </mat-card-content>
   </mat-card>
@@ -86,35 +71,17 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Open with focus</mat-label>
-        <input
-          matInput
-          type="text"
-          ngxTouchKeyboard
-          #material2TouchKeyboard="ngxTouchKeyboard"
-          (focus)="material2TouchKeyboard.openPanel()"
-        />
+        <input matInput type="text" ngxTouchKeyboard ngxTouchKeyboardOpenOnFocus />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Open with focus (Fullscreen mode)</mat-label>
-        <input
-          matInput
-          type="text"
-          ngxTouchKeyboard
-          ngxTouchKeyboardFullScreen
-          #materiaFullscreenTouchKeyboard="ngxTouchKeyboard"
-          (focus)="materiaFullscreenTouchKeyboard.openPanel()"
-        />
+        <input matInput type="text" ngxTouchKeyboard ngxTouchKeyboardOpenOnFocus ngxTouchKeyboardFullScreen />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Open with focus (textarea)</mat-label>
-        <textarea
-          matInput
-          ngxTouchKeyboard
-          #materialTextareaTouchKeyboard="ngxTouchKeyboard"
-          (focus)="materialTextareaTouchKeyboard.openPanel()"
-        ></textarea>
+        <textarea matInput ngxTouchKeyboard ngxTouchKeyboardOpenOnFocus></textarea>
       </mat-form-field>
     </mat-card-content>
   </mat-card>
@@ -140,9 +107,9 @@
         <mat-label>Language</mat-label>
         <mat-select placeholder="Placeholder" [(value)]="language">
           @for (item of languages; track item.value) {
-          <mat-option [value]="item.value">
-            {{ item.name }}
-          </mat-option>
+            <mat-option [value]="item.value">
+              {{ item.name }}
+            </mat-option>
           }
         </mat-select>
       </mat-form-field>
