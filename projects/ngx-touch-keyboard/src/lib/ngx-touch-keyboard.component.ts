@@ -494,7 +494,7 @@ export class NgxTouchKeyboardComponent {
     str: string,
     position = source.length,
     positionEnd = source.length,
-    moveCaret = false
+    moveCaret = false,
   ) {
     if (this.maxLength !== -1 && source.length >= this.maxLength) {
       return source;
@@ -582,13 +582,12 @@ export class NgxTouchKeyboardComponent {
           this._caretPosition,
           this._caretPositionEnd,
           event && event.target.tagName.toLowerCase(),
-          event
+          event,
         );
       }
-    } else if (event.type === 'pointerup' && this._activeInputElement === document.activeElement) {
-      if (this._isMouseHold) {
-        this.handleButtonUp('');
-      }
+    } else if (event.type === 'pointerup' && this._activeInputElement === document.activeElement && this._isMouseHold) {
+      // This is needed to ensure that if the user releases the button outside of the window, the keyboard doesn't get stuck.
+      this.handleButtonUp('');
       return;
     } else if (!isKeyboard && event?.type !== 'selectionchange') {
       /**

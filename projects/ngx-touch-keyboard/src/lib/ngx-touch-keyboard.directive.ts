@@ -38,6 +38,7 @@ export class NgxTouchKeyboardOrigin {
 export class NgxTouchKeyboardDirective implements OnDestroy {
   private _overlay = inject(Overlay);
   private _elementRef = inject(ElementRef<HTMLInputElement>);
+  private _isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   open = model(false, {
     alias: 'ngxTouchKeyboardOpen',
@@ -130,12 +131,15 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     // Update size the overlay
     this._overlayRef.updateSize(this._getOverlaySize(this.fullScreenMode()));
 
+    // Set input to readonly on mobile devices to prevent the native keyboard from appearing
+    if (this._isMobile) this._elementRef.nativeElement.readOnly = true;
+
     // Attach the portal to the overlay
     this._panelRef = this._overlayRef.attach(new ComponentPortal(NgxTouchKeyboardComponent));
     this._panelRef.instance.debug = this.debugMode();
     this._panelRef.instance.setLocale(this.locale());
     this._panelRef.instance.setActiveInput(this._elementRef.nativeElement);
-    this._panelRef.instance.closePanel.subscribe(() => this.closePanel());
+    this._panelRef.instance.closePanel.subscribe(() => this.open.set(false));
     this.open.set(true);
   }
 
@@ -143,6 +147,10 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
    * Close keyboard panel
    */
   closePanel(): void {
+    if (this._isMobile) {
+      this._elementRef.nativeElement.readOnly = false;
+      this._elementRef.nativeElement.blur();
+    }
     this._overlayRef?.detach();
     this.open.set(false);
   }
