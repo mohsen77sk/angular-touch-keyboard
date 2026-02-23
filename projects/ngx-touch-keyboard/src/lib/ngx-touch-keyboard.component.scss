@@ -31,7 +31,10 @@ ngx-touch-keyboard {
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   background: var(--tk-background);
-  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+  box-shadow:
+    0px 3px 1px -2px rgb(0 0 0 / 20%),
+    0px 2px 2px 0px rgb(0 0 0 / 14%),
+    0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
 
 .ngx-touch-keyboard-fullScreen > ngx-touch-keyboard {
@@ -73,7 +76,10 @@ ngx-touch-keyboard {
     justify-content: center;
     color: var(--tk-color-text);
     background-color: var(--tk-background-button);
-    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    box-shadow:
+      0px 3px 1px -2px rgb(0 0 0 / 20%),
+      0px 2px 2px 0px rgb(0 0 0 / 14%),
+      0px 1px 5px 0px rgb(0 0 0 / 12%);
 
     > svg {
       fill: var(--tk-color-text);
