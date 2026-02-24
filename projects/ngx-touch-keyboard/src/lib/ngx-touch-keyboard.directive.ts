@@ -2,7 +2,6 @@ import {
   booleanAttribute,
   ComponentRef,
   Directive,
-  effect,
   ElementRef,
   HostListener,
   inject,
@@ -32,7 +31,10 @@ export class NgxTouchKeyboardOrigin {
  * It also handles the creation and configuration of the overlay used to display the keyboard.
  */
 @Directive({
-  selector: 'input[ngxTouchKeyboard], textarea[ngxTouchKeyboard]',
+  selector: `input[ngxTouchKeyboard],
+             textarea[ngxTouchKeyboard],
+             ion-input[ngxTouchKeyboard],
+             ion-textarea[ngxTouchKeyboard]`,
   exportAs: 'ngxTouchKeyboard',
 })
 export class NgxTouchKeyboardDirective implements OnDestroy {
@@ -71,24 +73,23 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
   private _panelRef!: ComponentRef<NgxTouchKeyboardComponent>;
 
   @HostListener('focus')
-  onFocus(): void {
-    if (this.openOnFocus()) {
-      this.open.set(true);
+  @HostListener('ionFocus')
+  onFocus() {
+    if (this.openOnFocus() && !this.open()) {
+      this.openPanel();
     }
-  }
-
-  /**
-   * constructor
-   */
-  constructor() {
-    effect(() => {
-      this.open() ? this.openPanel() : this.closePanel();
-    });
   }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks
   // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * On changes
+   */
+  ngOnChanges() {
+    this.open() ? this.openPanel() : this.closePanel();
+  }
 
   /**
    * On destroy
@@ -131,15 +132,18 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     // Update size the overlay
     this._overlayRef.updateSize(this._getOverlaySize(this.fullScreenMode()));
 
+    // Get the input element associated with the directive
+    const inputElement = this._getInputElement();
+
     // Set input to readonly on mobile devices to prevent the native keyboard from appearing
-    if (this._isMobile) this._elementRef.nativeElement.readOnly = true;
+    if (this._isMobile) inputElement.readOnly = true;
 
     // Attach the portal to the overlay
     this._panelRef = this._overlayRef.attach(new ComponentPortal(NgxTouchKeyboardComponent));
     this._panelRef.instance.debug = this.debugMode();
     this._panelRef.instance.setLocale(this.locale());
-    this._panelRef.instance.setActiveInput(this._elementRef.nativeElement);
-    this._panelRef.instance.closePanel.subscribe(() => this.open.set(false));
+    this._panelRef.instance.setActiveInput(inputElement);
+    this._panelRef.instance.closePanel.subscribe(() => this.closePanel());
     this.open.set(true);
   }
 
@@ -159,11 +163,7 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
    * Toggle keyboard panel
    */
   togglePanel(): void {
-    if (this.open()) {
-      this.closePanel();
-    } else {
-      this.openPanel();
-    }
+    this.open() ? this.closePanel() : this.openPanel();
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -248,6 +248,21 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
       maxWidth: this._getOriginElement().getBoundingClientRect().width,
       minWidth: '260px',
     };
+  }
+
+  /**
+   * Gets the input element associated with the directive.
+   * This is necessary because when the directive is applied to an Ionic component (ion-input or ion-textarea),
+   * the actual input element is nested inside the component's template.
+   *
+   * @private
+   */
+  private _getInputElement(): HTMLInputElement | HTMLTextAreaElement {
+    if (['ION-INPUT', 'ION-TEXTAREA'].includes(this._elementRef.nativeElement.tagName)) {
+      return this._elementRef.nativeElement.querySelector('input, textarea');
+    }
+
+    return this._elementRef.nativeElement;
   }
 
   /**

@@ -1,6 +1,7 @@
 # AngularTouchKeyboard
 
 An Angular touch keyboard component that provides a customizable on-screen keyboard for input elements.
+Fully compatible with Angular, Angular Material, and Ionic Framework.
 
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![npm version](https://badge.fury.io/js/ngx-touch-keyboard.svg)](http://badge.fury.io/js/ngx-touch-keyboard) [![Build Status](https://github.com/mohsen77sk/angular-touch-keyboard/workflows/main/badge.svg)](https://github.com/mohsen77sk/angular-touch-keyboard/actions)
 
@@ -13,7 +14,9 @@ An Angular touch keyboard component that provides a customizable on-screen keybo
 - 🎯 Flexible positioning
 - 🖥️ Full-screen mode support
 - 🎨 Customizable appearance
-- 🔧 Material Design integration
+- Ⓜ️ AngularMaterial support
+- ⏺️ Ionic Framework support
+- ⌨️ Smart native keyboard handling on mobile devices
 
 ## Demo
 
@@ -67,12 +70,22 @@ export class AppModule { }
 
 Add the directive to your input elements:
 
+Basic usage
+
 ```html
 <input ngxTouchKeyboard [(ngxTouchKeyboardOpen)]="isOpen">
 ```
 
+Open keyboard on input focus
+
 ```html
 <input ngxTouchKeyboard ngxTouchKeyboardOpenOnFocus>
+```
+
+Basic usage in Ionic
+
+```html
+<ion-input ngxTouchKeyboard [(ngxTouchKeyboardOpen)]="isOpen"></ion-input>
 ```
 
 ## API Reference
@@ -83,7 +96,10 @@ Add the directive to your input elements:
 
 ```typescript
 @Directive({
-  selector: 'input[ngxTouchKeyboard], textarea[ngxTouchKeyboard]'
+  selector: `input[ngxTouchKeyboard],
+             textarea[ngxTouchKeyboard],
+             ion-input[ngxTouchKeyboard],
+             ion-textarea[ngxTouchKeyboard]`,
 })
 ```
 
@@ -103,10 +119,6 @@ Add the directive to your input elements:
 - `openPanel()`: Opens the keyboard panel
 - `closePanel()`: Closes the keyboard panel
 - `togglePanel()`: Toggles the keyboard panel visibility
-
-## Material Design Integration
-
-The component automatically detects and integrates with Angular Material form fields, providing proper positioning and styling.
 
 ## Advanced Usage
 

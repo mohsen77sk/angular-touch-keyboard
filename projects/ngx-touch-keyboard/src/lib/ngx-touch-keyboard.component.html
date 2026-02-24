@@ -1,5 +1,5 @@
 <div class="touch-keyboard" [class]="'layout-' + layoutMode + '-' + layoutName">
-  @for (row of locale.layouts[layoutMode + "_" + layoutName]; track row[0]; let rowIndex = $index) {
+  @for (row of locale.layouts[layoutMode + "_" + layoutName]; track row[0]) {
     <div class="touch-keyboard-row">
       @for (key of row; track key) {
         <button
