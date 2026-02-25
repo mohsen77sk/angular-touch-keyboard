@@ -152,8 +152,10 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
    */
   closePanel(): void {
     if (this._isMobile) {
-      this._elementRef.nativeElement.readOnly = false;
-      this._elementRef.nativeElement.blur();
+      // Get the input element and remove readonly mode
+      const inputElement = this._getInputElement();
+      inputElement.readOnly = false;
+      inputElement.blur();
     }
     this._overlayRef?.detach();
     this.open.set(false);
