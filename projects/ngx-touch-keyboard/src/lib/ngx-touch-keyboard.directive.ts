@@ -135,6 +135,9 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     // Get the input element associated with the directive
     const inputElement = this._getInputElement();
 
+    // Get the container input element associated with the directive
+    const inputContainerElement = this._getOriginElement();
+
     // Set input to readonly on mobile devices to prevent the native keyboard from appearing
     if (this._isMobile) inputElement.readOnly = true;
 
@@ -143,6 +146,7 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
     this._panelRef.instance.debug = this.debugMode();
     this._panelRef.instance.setLocale(this.locale());
     this._panelRef.instance.setActiveInput(inputElement);
+    this._panelRef.instance.activeInputContainer(inputContainerElement);
     this._panelRef.instance.closePanel.subscribe(() => this.closePanel());
     this.open.set(true);
   }

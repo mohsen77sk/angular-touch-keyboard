@@ -39,6 +39,7 @@ export class NgxTouchKeyboardComponent {
   private _caretPosition: number | null = null;
   private _caretPositionEnd: number | null = null;
   private _activeInputElement!: HTMLInputElement | HTMLTextAreaElement | null;
+  private _activeInputContainer!: HTMLElement | null;
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors
@@ -122,6 +123,15 @@ export class NgxTouchKeyboardComponent {
     }
 
     this.locale = value;
+  }
+
+  /**
+   * Set active input container
+   *
+   * @param input Input container native element
+   */
+  activeInputContainer(input: HTMLElement): void {
+    this._activeInputContainer = input;
   }
 
   /**
@@ -569,6 +579,14 @@ export class NgxTouchKeyboardComponent {
       event.target === this._elementRef.nativeElement ||
       (event.target && this._elementRef.nativeElement.contains(event.target));
 
+    const isInputContainer =
+      this._activeInputContainer &&
+      (event.target === this._activeInputContainer || this._activeInputContainer.contains(event.target));
+
+    if (this.debug) {
+      console.log(`Click on input container: "${isInputContainer}", Click on keyboard: "${isKeyboard}"`);
+    }
+
     if (isTextInput && this._activeInputElement == event.target) {
       /**
        * Tracks current cursor position
@@ -589,7 +607,7 @@ export class NgxTouchKeyboardComponent {
       // This is needed to ensure that if the user releases the button outside of the window, the keyboard doesn't get stuck.
       this.handleButtonUp('');
       return;
-    } else if (!isKeyboard && event?.type !== 'selectionchange') {
+    } else if (!isInputContainer && !isKeyboard && event?.type !== 'selectionchange') {
       /**
        * we must ensure caretPosition doesn't persist once reactivated.
        */
