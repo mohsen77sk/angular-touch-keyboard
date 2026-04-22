@@ -258,17 +258,23 @@ export class NgxTouchKeyboardDirective implements OnDestroy {
 
   /**
    * Gets the input element associated with the directive.
-   * This is necessary because when the directive is applied to an Ionic component (ion-input or ion-textarea),
-   * the actual input element is nested inside the component's template.
    *
    * @private
    */
   private _getInputElement(): HTMLInputElement | HTMLTextAreaElement {
-    if (['ION-INPUT', 'ION-TEXTAREA'].includes(this._elementRef.nativeElement.tagName)) {
-      return this._elementRef.nativeElement.querySelector('input, textarea');
+    const el = this._elementRef.nativeElement as HTMLElement;
+
+    if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+      return el;
     }
 
-    return this._elementRef.nativeElement;
+    const input = el.querySelector('input, textarea');
+
+    if (!input) {
+      throw new Error('No input or textarea element found.');
+    }
+
+    return input as HTMLInputElement | HTMLTextAreaElement;
   }
 
   /**
